@@ -1,0 +1,27 @@
+[
+  {
+    "outputFileName": "wwwroot/css/bootstrap.min.css",
+    "inputFiles": [
+      "wwwroot/css/bootstrap.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/bundleHeader.css",
+    "inputFiles": [
+      "wwwroot/css/bootstrap.css",
+      "wwwroot/css/dark.css",
+      "wwwroot/css/font-icons.css",
+      "wwwroot/css/animate.css",
+      "wwwroot/css/magnific-popup.css",
+      "wwwroot/css/calendar.css",
+      "wwwroot/css/responsive.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/bundleFooter.js",
+    "inputFiles": [
+      "wwwroot/js/jquery.js",
+      "wwwroot/js/plugins.js"
+    ]
+  }
+]

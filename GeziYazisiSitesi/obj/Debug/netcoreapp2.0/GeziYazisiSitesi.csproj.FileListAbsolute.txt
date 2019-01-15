@@ -1,0 +1,11 @@
+C:\Users\Enes Yılmaz\source\repos\GeziYazisiSitesi\GeziYazisiSitesi\bin\Debug\netcoreapp2.0\GeziYazisiSitesi.deps.json
+C:\Users\Enes Yılmaz\source\repos\GeziYazisiSitesi\GeziYazisiSitesi\bin\Debug\netcoreapp2.0\GeziYazisiSitesi.runtimeconfig.json
+C:\Users\Enes Yılmaz\source\repos\GeziYazisiSitesi\GeziYazisiSitesi\bin\Debug\netcoreapp2.0\GeziYazisiSitesi.runtimeconfig.dev.json
+C:\Users\Enes Yılmaz\source\repos\GeziYazisiSitesi\GeziYazisiSitesi\bin\Debug\netcoreapp2.0\GeziYazisiSitesi.dll
+C:\Users\Enes Yılmaz\source\repos\GeziYazisiSitesi\GeziYazisiSitesi\obj\Debug\netcoreapp2.0\GeziYazisiSitesi.csprojAssemblyReference.cache
+C:\Users\Enes Yılmaz\source\repos\GeziYazisiSitesi\GeziYazisiSitesi\obj\Debug\netcoreapp2.0\GeziYazisiSitesi.csproj.CoreCompileInputs.cache
+C:\Users\Enes Yılmaz\source\repos\GeziYazisiSitesi\GeziYazisiSitesi\obj\Debug\netcoreapp2.0\GeziYazisiSitesi.AssemblyInfoInputs.cache
+C:\Users\Enes Yılmaz\source\repos\GeziYazisiSitesi\GeziYazisiSitesi\obj\Debug\netcoreapp2.0\GeziYazisiSitesi.AssemblyInfo.cs
+C:\Users\Enes Yılmaz\source\repos\GeziYazisiSitesi\GeziYazisiSitesi\bin\Debug\netcoreapp2.0\GeziYazisiSitesi.pdb
+C:\Users\Enes Yılmaz\source\repos\GeziYazisiSitesi\GeziYazisiSitesi\obj\Debug\netcoreapp2.0\GeziYazisiSitesi.dll
+C:\Users\Enes Yılmaz\source\repos\GeziYazisiSitesi\GeziYazisiSitesi\obj\Debug\netcoreapp2.0\GeziYazisiSitesi.pdb
