@@ -28,24 +28,31 @@ namespace GeziYazisiSitesi.Migrations
                 {
                     YaziId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    YazarUyeID = table.Column<int>(nullable: true),
-                    baslik = table.Column<string>(nullable: true)
+                    Baslik = table.Column<string>(nullable: true),
+                    BegenmeSayisi = table.Column<int>(nullable: false),
+                    Goruntulenme = table.Column<int>(nullable: false),
+                    Icerik = table.Column<string>(nullable: true),
+                    Onay = table.Column<bool>(nullable: false),
+                    Resim = table.Column<string>(nullable: true),
+                    Tarih = table.Column<DateTime>(nullable: false),
+                    UyeId = table.Column<int>(nullable: false),
+                    YorumSayisi = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Yazis", x => x.YaziId);
                     table.ForeignKey(
-                        name: "FK_Yazis_Uyes_YazarUyeID",
-                        column: x => x.YazarUyeID,
+                        name: "FK_Yazis_Uyes_UyeId",
+                        column: x => x.UyeId,
                         principalTable: "Uyes",
                         principalColumn: "UyeID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Yazis_YazarUyeID",
+                name: "IX_Yazis_UyeId",
                 table: "Yazis",
-                column: "YazarUyeID");
+                column: "UyeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -11,7 +11,7 @@ using System;
 namespace GeziYazisiSitesi.Migrations
 {
     [DbContext(typeof(GeziContext))]
-    [Migration("20190117095851_InitialCreate")]
+    [Migration("20190117133746_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,22 +38,37 @@ namespace GeziYazisiSitesi.Migrations
                     b.Property<int>("YaziId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("YazarUyeID");
+                    b.Property<string>("Baslik");
 
-                    b.Property<string>("baslik");
+                    b.Property<int>("BegenmeSayisi");
+
+                    b.Property<int>("Goruntulenme");
+
+                    b.Property<string>("Icerik");
+
+                    b.Property<bool>("Onay");
+
+                    b.Property<string>("Resim");
+
+                    b.Property<DateTime>("Tarih");
+
+                    b.Property<int>("UyeId");
+
+                    b.Property<int>("YorumSayisi");
 
                     b.HasKey("YaziId");
 
-                    b.HasIndex("YazarUyeID");
+                    b.HasIndex("UyeId");
 
                     b.ToTable("Yazis");
                 });
 
             modelBuilder.Entity("GeziYazisiSitesi.Modals.Yazi", b =>
                 {
-                    b.HasOne("GeziYazisiSitesi.Modals.Uye", "Yazar")
+                    b.HasOne("GeziYazisiSitesi.Modals.Uye", "Uye")
                         .WithMany("Yazilar")
-                        .HasForeignKey("YazarUyeID");
+                        .HasForeignKey("UyeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

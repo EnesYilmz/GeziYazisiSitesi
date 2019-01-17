@@ -1,0 +1,73 @@
+﻿@model IEnumerable<GeziYazisiSitesi.Modals.Yazi>
+
+@{
+    ViewData["Title"] = "Yazılar";
+}
+
+<h2>Yazilar</h2>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Baslik)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Icerik)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Resim)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tarih)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Onay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BegenmeSayisi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.YorumSayisi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Goruntulenme)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Baslik)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Icerik)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Resim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tarih)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Onay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BegenmeSayisi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YorumSayisi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Goruntulenme)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.YaziId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.YaziId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.YaziId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
