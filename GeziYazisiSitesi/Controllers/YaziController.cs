@@ -5,29 +5,36 @@ using System.Threading.Tasks;
 using GeziYazisiSitesi.Abstract;
 using GeziYazisiSitesi.Modals;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GeziYazisiSitesi.Controllers
 {
     public class YaziController : Controller
     {
-        private IYaziRepository yaziRepository;
+        private IYaziRepository _yaziRepository;
+        private IUlkeRepository _ulkeRepository;
+        private ISehirRepository _sehirRepository;
 
-        public YaziController(IYaziRepository repository)
+        public YaziController(IYaziRepository yaziRepo, IUlkeRepository ulkeRepo, ISehirRepository sehirRepo)
         {
-            yaziRepository = repository;
+            _yaziRepository = yaziRepo;
+            _ulkeRepository = ulkeRepo;
+            _sehirRepository = sehirRepo;
         }
         public IActionResult Index()
         {
-            return View(yaziRepository.GetAll());
+            return View(_yaziRepository.GetAll());
         }
         [HttpGet]
         public IActionResult Yaz()
         {
+            ViewBag.Sehirler = new SelectList(_sehirRepository.GetAll(), "SehirId", "Ad");
             return View();
         }
         [HttpPost]
         public IActionResult Yaz(Yazi entity)
         {
+            ViewBag.Sehirler = new SelectList(_sehirRepository.GetAll(), "SehirId", "Ad");
             if (ModelState.IsValid)
             {
                 entity.Tarih = DateTime.Now;
@@ -36,7 +43,7 @@ namespace GeziYazisiSitesi.Controllers
                 entity.Goruntulenme = 0;
                 entity.YorumSayisi = 0;
                 entity.UyeId = 1;
-                yaziRepository.AddYazi(entity);
+                _yaziRepository.AddYazi(entity);
                 return RedirectToAction("Yazilar");
             }
             return View(entity);
@@ -44,7 +51,7 @@ namespace GeziYazisiSitesi.Controllers
 
         public IActionResult Yazilar()
         {
-            return View(yaziRepository.GetAll());
+            return View(_yaziRepository.GetAll());
         }
     }
 }

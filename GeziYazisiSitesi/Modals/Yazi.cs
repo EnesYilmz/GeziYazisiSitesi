@@ -31,5 +31,9 @@ namespace GeziYazisiSitesi.Modals
         public int UyeId { get; set; }
 
         public Uye Uye { get; set; }
+        [Required(ErrorMessage = "Şehir Seçiniz...")]
+        public int SehirId { get; set; }
+
+        public Sehir Sehir { get; set; }
     }
 }

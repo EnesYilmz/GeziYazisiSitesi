@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<GeziYazisiSitesi.Modals.Yazi>
 
 @{
-    ViewData["Title"] = "Yazılar";
+    ViewData["Title"] = "Yazilar";
 }
 
 <h2>Yazilar</h2>
@@ -32,6 +32,12 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Goruntulenme)
                 </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sehir)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Uye)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -61,6 +67,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Goruntulenme)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SehirId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UyeId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.YaziId">Edit</a> |

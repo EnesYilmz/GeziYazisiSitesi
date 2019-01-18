@@ -26,6 +26,8 @@ namespace GeziYazisiSitesi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IYaziRepository, EfYaziRepository>();
+            services.AddTransient<ISehirRepository, EfSehirRepository>();
+            services.AddTransient<IUlkeRepository, EfUlkeRepository>();
             services.AddDbContext<GeziContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
         }

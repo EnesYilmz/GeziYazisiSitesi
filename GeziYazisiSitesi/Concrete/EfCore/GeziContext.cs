@@ -17,5 +17,9 @@ namespace GeziYazisiSitesi.Concrete.EfCore
         public DbSet<Uye> Uyes { get; set; }
 
         public DbSet<Yazi> Yazis { get; set; }
+
+        public DbSet<Ulke> Ulkes { get; set; }
+
+        public DbSet<Sehir> Sehirs { get; set; }
     }
 }

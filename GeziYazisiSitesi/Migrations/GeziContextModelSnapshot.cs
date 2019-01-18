@@ -20,6 +20,34 @@ namespace GeziYazisiSitesi.Migrations
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("GeziYazisiSitesi.Modals.Sehir", b =>
+                {
+                    b.Property<int>("SehirId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Ad");
+
+                    b.Property<int>("UlkeId");
+
+                    b.HasKey("SehirId");
+
+                    b.HasIndex("UlkeId");
+
+                    b.ToTable("Sehirs");
+                });
+
+            modelBuilder.Entity("GeziYazisiSitesi.Modals.Ulke", b =>
+                {
+                    b.Property<int>("UlkeId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Ad");
+
+                    b.HasKey("UlkeId");
+
+                    b.ToTable("Ulkes");
+                });
+
             modelBuilder.Entity("GeziYazisiSitesi.Modals.Uye", b =>
                 {
                     b.Property<int>("UyeID")
@@ -37,17 +65,22 @@ namespace GeziYazisiSitesi.Migrations
                     b.Property<int>("YaziId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Baslik");
+                    b.Property<string>("Baslik")
+                        .IsRequired();
 
                     b.Property<int>("BegenmeSayisi");
 
                     b.Property<int>("Goruntulenme");
 
-                    b.Property<string>("Icerik");
+                    b.Property<string>("Icerik")
+                        .IsRequired();
 
                     b.Property<bool>("Onay");
 
-                    b.Property<string>("Resim");
+                    b.Property<string>("Resim")
+                        .IsRequired();
+
+                    b.Property<int>("SehirId");
 
                     b.Property<DateTime>("Tarih");
 
@@ -57,13 +90,28 @@ namespace GeziYazisiSitesi.Migrations
 
                     b.HasKey("YaziId");
 
+                    b.HasIndex("SehirId");
+
                     b.HasIndex("UyeId");
 
                     b.ToTable("Yazis");
                 });
 
+            modelBuilder.Entity("GeziYazisiSitesi.Modals.Sehir", b =>
+                {
+                    b.HasOne("GeziYazisiSitesi.Modals.Ulke", "Ulke")
+                        .WithMany()
+                        .HasForeignKey("UlkeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("GeziYazisiSitesi.Modals.Yazi", b =>
                 {
+                    b.HasOne("GeziYazisiSitesi.Modals.Sehir", "Sehir")
+                        .WithMany()
+                        .HasForeignKey("SehirId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("GeziYazisiSitesi.Modals.Uye", "Uye")
                         .WithMany("Yazilar")
                         .HasForeignKey("UyeId")
