@@ -32,6 +32,7 @@ namespace GeziYazisiSitesi.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Yaz(Yazi entity)
         {
             ViewBag.Sehirler = new SelectList(_sehirRepository.GetAll(), "SehirId", "Ad");
@@ -51,7 +52,46 @@ namespace GeziYazisiSitesi.Controllers
 
         public IActionResult Yazilar()
         {
-            return View(_yaziRepository.GetAll());
+            return View(Tuple.Create(_yaziRepository.GetAll().OrderByDescending(i => i.Tarih),_sehirRepository.GetAll()));
+        }
+
+        public IActionResult Oku(int id)
+        {
+            var yazi = _yaziRepository.GetById(id);
+            ViewBag.Sehir = _sehirRepository.GetById(yazi.SehirId).Ad;
+            return View(yazi);
+        }
+
+        [HttpGet]
+        public IActionResult Duzenle(int id)
+        {
+            return View(_yaziRepository.GetById(id));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Duzenle(Yazi yazi)
+        {
+            if (ModelState.IsValid)
+            {
+                _yaziRepository.UpdateYazi(yazi);
+                return RedirectToAction("Index");
+            }
+            return View(yazi);
+        }
+
+        [HttpGet]
+        public IActionResult Sil(int id)
+        {
+            return View(_yaziRepository.GetById(id));
+        }
+
+        [HttpPost, ActionName("Sil")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _yaziRepository.DeleteYazi(id);
+            return RedirectToAction("Index");
         }
     }
 }

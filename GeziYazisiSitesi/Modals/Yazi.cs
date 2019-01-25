@@ -17,7 +17,8 @@ namespace GeziYazisiSitesi.Modals
         public string Icerik { get; set; }
         [Required(ErrorMessage = "Resim giriniz...")]
         public string Resim { get; set; }
-
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Tarih { get; set; }
 
         public bool Onay { get; set; }

@@ -43,8 +43,15 @@ namespace GeziYazisiSitesi.Concrete.EfCore
 
         public void UpdateYazi(Yazi entity)
         {
-            context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            context.SaveChanges();
+            var yazi = GetById(entity.YaziId);
+
+            if(yazi != null)
+            {
+                yazi.Baslik = entity.Baslik;
+                yazi.Icerik = entity.Icerik;
+                yazi.Resim = entity.Resim;
+                context.SaveChanges();
+            }
         }
     }
 }

@@ -1,0 +1,75 @@
+﻿@model GeziYazisiSitesi.Modals.Yazi
+
+@{
+    ViewData["Title"] = "Sil";
+}
+<section id="page-title">
+    <div class="container clearfix">
+        <h1>YAZI SİL</h1>
+    </div>
+</section>
+<section id="content">
+    <div class="content-wrap">
+        <div class="container clearfix ">
+            <h3>Yazıyı silmek istediğinizden emin misiniz ?</h3>
+            <div>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Baslik)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Baslik)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Icerik)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Icerik)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Resim)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Resim)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Tarih)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Tarih)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Onay)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Onay)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BegenmeSayisi)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.BegenmeSayisi)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.YorumSayisi)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.YorumSayisi)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Goruntulenme)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Goruntulenme)
+                    </dd>
+                </dl>
+
+                <form asp-action="Sil">
+                    <input type="hidden" asp-for="YaziId" />
+                    <input type="submit" value="Sil" class="btn btn-danger" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

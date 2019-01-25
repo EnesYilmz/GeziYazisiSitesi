@@ -7,40 +7,42 @@
     <!-- Stylesheets
     ============================================= -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="@Url.Content("~/css/bootstrap.css")" type="text/css" />
-	<link rel="stylesheet" href="@Url.Content("~/css/style.css")" type="text/css" />
-	<link rel="stylesheet" href="@Url.Content("~/css/dark.css")" type="text/css" />
-	<link rel="stylesheet" href="@Url.Content("~/css/font-icons.css")" type="text/css" />
-	<link rel="stylesheet" href="@Url.Content("~/css/animate.css")" type="text/css" />
-	<link rel="stylesheet" href="@Url.Content("~/css/magnific-popup.css")" type="text/css" />
-	<link rel="stylesheet" href="@Url.Content("~/css/calendar.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/bootstrap.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/style.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/font-awesome.min.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/dark.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/font-icons.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/animate.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/magnific-popup.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/calendar.css")" type="text/css" />
 
-	<link rel="stylesheet" href="@Url.Content("~/css/responsive.css")" type="text/css" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="@Url.Content("~/css/responsive.css")" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Document Title
     ============================================= -->
     <title>@ViewBag.Title</title>
     <style>
-    #header .btn {
-    	margin: 33px 0 33px 15px;
-    	-webkit-transition: all .4s ease;
-    	-o-transition: all .4s ease;
-    	transition: all .4s ease;
-    }
-    
-    #header.sticky-header .btn { margin: 13px 0 13px 15px; }
-    
-    @@media (max-width: 991px) {
-    
-    	#header .btn {
-    		position: absolute;
-    		margin: 0;
-    		top: 33px;
-    		left: auto;
-    		right: 15px;
-    	}
-    
-    }
+        #header .btn {
+            margin: 33px 0 33px 15px;
+            -webkit-transition: all .4s ease;
+            -o-transition: all .4s ease;
+            transition: all .4s ease;
+        }
+
+        #header.sticky-header .btn {
+            margin: 13px 0 13px 15px;
+        }
+
+        @@media (max-width: 991px) {
+
+            #header .btn {
+                position: absolute;
+                margin: 0;
+                top: 33px;
+                left: auto;
+                right: 15px;
+            }
+        }
     </style>
 </head>
 <body class="stretched">
@@ -74,10 +76,10 @@
                                 <a href="index.html"><div>Home</div></a>
                                 <ul>
                                     <li>
-                                        <a href="index-corporate.html"><div>Home - Corporate</div></a>
+                                        <a href="index-corporate.html"><div>Yazılar</div></a>
                                         <ul>
-                                            <li><a href="index-corporate.html"><div>Corporate - Layout 1</div></a></li>
-                                            <li><a href="index-corporate-2.html"><div>Corporate - Layout 2</div></a></li>
+                                            <li><a asp-controller="Yazi" asp-action="Yazilar"><div>Yazılar</div></a></li>
+                                            <li><a asp-controller="Yazi" asp-action="Index"><div>Yazılar Liste</div></a></li>
                                             <li><a href="index-corporate-3.html"><div>Corporate - Layout 3</div></a></li>
                                             <li><a href="index-corporate-4.html"><div>Corporate - Layout 4</div></a></li>
                                         </ul>

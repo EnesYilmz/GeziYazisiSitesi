@@ -1,85 +1,54 @@
-﻿@model IEnumerable<GeziYazisiSitesi.Modals.Yazi>
+﻿@model Tuple<IOrderedQueryable<GeziYazisiSitesi.Modals.Yazi>, IQueryable<GeziYazisiSitesi.Modals.Sehir>>
 
 @{
-    ViewData["Title"] = "Yazilar";
+    ViewData["Title"] = "Yazılar";
 }
 
-<h2>Yazilar</h2>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Baslik)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Icerik)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Resim)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tarih)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Onay)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BegenmeSayisi)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.YorumSayisi)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Goruntulenme)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sehir)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Uye)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Baslik)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Icerik)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Resim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tarih)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Onay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BegenmeSayisi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YorumSayisi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Goruntulenme)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SehirId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UyeId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.YaziId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.YaziId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.YaziId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<section id="page-title">
+    <div class="container clearfix">
+        <h1>En Son Yazılar</h1>
+    </div>
+</section>
+
+<section id="content">
+    <div class="content-wrap">
+        <div class="container clearfix">
+            <div id="posts" class="post-grid grid-container grid-3 clearfix" data-layout="fitRows">
+                @foreach (var item in Model.Item1)
+                {
+
+                    <div class="entry clearfix">
+                        <div class="entry-image">
+                            <a asp-action="Oku" asp-route-id="@item.YaziId" data-lightbox="image"><img class="image_fade" src="@Html.DisplayFor(modelItem => item.Resim)" alt="@Html.DisplayFor(modelItem => item.Baslik)"></a>
+                        </div>
+                        <div class="entry-title">
+                            <h2><a href="blog-single.html">@Html.DisplayFor(modelItem => item.Baslik)</a></h2>
+                        </div>
+                        <ul class="entry-meta clearfix">
+                            <li><i class="icon-calendar3"></i> @Html.DisplayFor(modelItem => item.Tarih)</li>
+                            <li><a href="blog-single.html#comments"><i class="icon-comments"></i> @Html.DisplayFor(modelItem => item.YorumSayisi)</a></li>
+                            <li><a href="blog-single.html#comments"><i class="fa fa-thumbs-o-up"></i> @Html.DisplayFor(modelItem => item.BegenmeSayisi)</a></li>
+                            <li><a href="blog-single.html#comments"><i class="fa fa-eye"></i> @Html.DisplayFor(modelItem => item.Goruntulenme)</a></li>
+                            <li><a href="#"><i class="fa fa-plane"></i> @Model.Item2.FirstOrDefault(i => i.SehirId == item.SehirId).Ad  </a></li>
+                        </ul>
+                        <div class="entry-content">
+                            <p>@Html.DisplayFor(modelItem => item.Icerik)</p>
+                            <a asp-action="Oku" asp-route-id="@item.YaziId" class="more-link">Devamını Oku</a>
+                        </div>
+                    </div>
+
+                }
+            </div>
+            <!-- Pagination
+            ============================================= -->
+            <div class="row mb-3">
+                <div class="col-12">
+                    <a href="#" class="btn btn-outline-secondary float-left">&larr; Older</a>
+                    <a href="#" class="btn btn-outline-dark float-right">Newer &rarr;</a>
+                </div>
+            </div>
+            <!-- .pager end -->
+
+        </div>
+    </div>
+</section>

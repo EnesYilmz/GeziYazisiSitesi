@@ -1,11 +1,12 @@
 ﻿@model GeziYazisiSitesi.Modals.Yazi
 
 @{
-    ViewData["Title"] = "Yaz";
+    ViewData["Title"] = "Duzenle";
 }
+
 <section id="page-title">
     <div class="container clearfix">
-        <h1>Yazı Yaz</h1>
+        <h1>Düzenle</h1>
     </div>
 </section>
 
@@ -13,16 +14,10 @@
     <div class="content-wrap">
         <div class="container clearfix ">
 
-            <form asp-action="Yaz">
+            <form asp-action="Duzenle">
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Sehir"></label>
-                    <select class="form-control" asp-for="SehirId" asp-items="ViewBag.Sehirler">
-                        <option disabled selected value="">Şehir Seç</option>
-                    </select>
-                    <span asp-validation-for="SehirId" class="text-danger"></span>
-                </div>
+                <input type="hidden" asp-for="YaziId" />
                 <div class="form-group">
                     <label asp-for="Baslik" class="control-label"></label>
                     <input asp-for="Baslik" class="form-control" />
@@ -38,11 +33,12 @@
                     <input asp-for="Resim" class="form-control" />
                     <span asp-validation-for="Resim" class="text-danger"></span>
                 </div>
-
                 <div class="form-group text-center">
-                    <input type="submit" value="Gönder" class="btn btn-success" />
+                    <input type="submit" value="Kaydet" class="btn btn-success" />
                 </div>
             </form>
         </div>
     </div>
 </section>
+
+
