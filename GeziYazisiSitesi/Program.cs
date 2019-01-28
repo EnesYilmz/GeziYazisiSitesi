@@ -20,6 +20,7 @@ namespace GeziYazisiSitesi
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseDefaultServiceProvider(option => option.ValidateScopes=false)
                 .Build();
     }
 }

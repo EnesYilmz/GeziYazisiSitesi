@@ -11,9 +11,10 @@ using System;
 namespace GeziYazisiSitesi.Migrations
 {
     [DbContext(typeof(GeziContext))]
-    partial class GeziContextModelSnapshot : ModelSnapshot
+    [Migration("20190118083554_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

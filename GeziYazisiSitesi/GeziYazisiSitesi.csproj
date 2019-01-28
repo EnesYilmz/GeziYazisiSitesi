@@ -21,6 +21,8 @@
     <None Include="wwwroot\css\fonts\lined-icons.svg" />
     <None Include="wwwroot\css\fonts\Simple-Line-Icons.dev.svg" />
     <None Include="wwwroot\css\fonts\Simple-Line-Icons.svg" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.woff2" />
     <None Include="wwwroot\images\blank.svg" />
     <None Include="wwwroot\images\icons\iconalt.svg" />
     <None Include="wwwroot\images\intro\niche\photography1.psd" />
@@ -30,10 +32,6 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.Dotnet" Version="2.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Abstract\" />
   </ItemGroup>
 
 </Project>
