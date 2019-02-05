@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Core2Identity.Models;
 using GeziYazisiSitesi.Modals;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -31,11 +33,17 @@ namespace Core2Identity.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Yaz(Yazi entity)
+        public async Task<IActionResult> Yaz(Yazi entity, IFormFile file)
         {
             ViewBag.Sehirler = new SelectList(context.Sehir, "SehirId", "Ad");
             if (ModelState.IsValid)
             {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", file.FileName);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+                entity.Resim = file.FileName;
                 entity.Tarih = DateTime.Now;
                 entity.Onay = false;
                 entity.BegenmeSayisi = 0;
@@ -69,7 +77,7 @@ namespace Core2Identity.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Duzenle(Yazi entity)
+        public async Task<IActionResult> Duzenle(Yazi entity, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -78,9 +86,14 @@ namespace Core2Identity.Controllers
 
                 if (yazi != null)
                 {
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", file.FileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
                     yazi.Baslik = entity.Baslik;
                     yazi.Icerik = entity.Icerik;
-                    yazi.Resim = entity.Resim;
+                    yazi.Resim = file.FileName;
                     context.SaveChanges();
                 }
 

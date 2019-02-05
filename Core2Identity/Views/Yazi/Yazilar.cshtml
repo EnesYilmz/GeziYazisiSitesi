@@ -18,7 +18,7 @@
 
                     <div class="entry clearfix">
                         <div class="entry-image">
-                            <a asp-action="Oku" asp-route-id="@item.YaziId" data-lightbox="image"><img class="image_fade" src="@Html.DisplayFor(modelItem => item.Resim)" alt="@Html.DisplayFor(modelItem => item.Baslik)"></a>
+                            <a asp-action="Oku" asp-route-id="@item.YaziId" data-lightbox="image"><img class="image_fade" src="~/img/@Html.DisplayFor(modelItem => item.Resim)" alt="@Html.DisplayFor(modelItem => item.Baslik)"></a>
                         </div>
                         <div class="entry-title">
                             <h2><a href="blog-single.html">@Html.DisplayFor(modelItem => item.Baslik)</a></h2>

@@ -1,0 +1,27 @@
+﻿@model GeziYazisiSitesi.Modals.Ulke
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<section id="page-title">
+    <div class="container clearfix">
+        <h1>Detay</h1>
+    </div>
+</section>
+<div>
+    <h4>Ülke</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ad)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ad)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.UlkeId">Düzenle</a> |
+    <a asp-action="Index">Listeye Geri Dön</a>
+</div>

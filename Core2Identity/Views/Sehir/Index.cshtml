@@ -1,0 +1,39 @@
+﻿@model IEnumerable<GeziYazisiSitesi.Modals.Sehir>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section id="page-title">
+    <div class="container clearfix">
+        <h1>Şehirler Kontrol Paneli</h1>
+    </div>
+</section>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ad)
+            </th>
+            <th>
+                <a asp-action="Create"><button class="btn btn-success">Yeni Şehir Ekle</button></a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ad)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.SehirId">Düzenle</a> |
+                    <a asp-action="Details" asp-route-id="@item.SehirId">Detay</a> |
+                    <a asp-action="Delete" asp-route-id="@item.SehirId">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

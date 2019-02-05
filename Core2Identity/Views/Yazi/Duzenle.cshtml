@@ -14,7 +14,7 @@
     <div class="content-wrap">
         <div class="container clearfix ">
 
-            <form asp-action="Duzenle">
+            <form asp-action="Duzenle" method="post" enctype="multipart/form-data">
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="YaziId" />
@@ -29,9 +29,9 @@
                     <span asp-validation-for="Icerik" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Resim" class="control-label"></label>
-                    <input asp-for="Resim" class="form-control" />
-                    <span asp-validation-for="Resim" class="text-danger"></span>
+                    <label>Resim</label><br />
+                    <img src="~/img/@Model.Resim" width="256" />
+                    <input type="file" name="file" id="file" class="form-control" />
                 </div>
                 <div class="form-group text-center">
                     <input type="submit" value="Kaydet" class="btn btn-success" />

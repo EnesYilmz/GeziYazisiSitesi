@@ -400,4 +400,8 @@
     <None Include="obj\Debug\netcoreapp2.0\Core2Identity.pdb" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
 </Project>
