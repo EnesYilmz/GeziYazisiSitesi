@@ -1,7 +1,10 @@
 ﻿@model GeziYazisiSitesi.Modals.Yazi
+@using GeziYazisiSitesi.Modals
 
 @{
     ViewData["Title"] = "Yaz";
+    var Ulkeler = (List<Ulke>)ViewBag.Ulkeler;
+    var Sehirler = (List<Sehir>)ViewBag.Sehirler;
 }
 <section id="page-title">
     <div class="container clearfix">
@@ -15,32 +18,69 @@
             <form asp-action="Yaz" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label>ŞEHİR</label>
-                    <select class="form-control" asp-for="SehirId" asp-items="ViewBag.Sehirler">
-                        <option disabled selected value="">Şehir Seç</option>
+                    <label class="control-label">ÜLKE</label>
+                    <select class="form-control" id="ulkeler" onchange="giveSelection(this.value)">
+                        <option disabled selected value="">Ülke Seç</option>
+                        @foreach (var item in Ulkeler)
+                        {
+                            <option value="@item.UlkeId">@item.Ad</option>
+                        }
                     </select>
-                    <span asp-validation-for="SehirId" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Baslik" class="control-label"></label>
+                    <label class="control-label">ŞEHİR</label>
+                    <select class="form-control" asp-for="SehirId" id="sehirler">
+                        <option disabled selected value="">Şehir Seç</option>
+                        @foreach (var item in Sehirler)
+                        {
+                            <option data-option="@item.UlkeId" value="@item.SehirId">@item.Ad</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">BAŞLIK</label>
                     <input asp-for="Baslik" class="form-control" />
                     <span asp-validation-for="Baslik" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Icerik" class="control-label"></label>
-                    <textarea asp-for="Icerik" class="form-control"></textarea>
-                    <span asp-validation-for="Icerik" class="text-danger"></span>
+                    <label class="control-label">İÇERİK</label>
+                    @Html.TextAreaFor(model => model.Icerik, new { @class = "ckeditor" })
+                    @Html.ValidationMessageFor(model => model.Icerik, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-                    <label>Resim</label>
+                    <label>KAPAK RESMİ</label>
                     <input type="file" name="file" id="file" class="form-control" />
+                    <span class="text-danger">@ViewBag.ResimHata</span>
                 </div>
 
                 <div class="form-group text-center">
-                    <input type="submit" value="Gönder" class="btn btn-success" />
+                    <span class="text-danger">Bütün alanların doldurulması zorunludur!</span>
+                    <br />
+                    <input id="submit" disabled type="submit" value="Gönder" class="btn btn-success" />
                 </div>
             </form>
         </div>
     </div>
 </section>
+<script>
+    var ulkeler = document.querySelector('#ulkeler');
+    var sehirler = document.querySelector('#sehirler');
+    var options2 = sehirler.querySelectorAll('option');
+
+    function giveSelection(selValue) {
+        sehirler.innerHTML = '';    
+        for (var i = 0; i < options2.length; i++) {
+            if (options2[i].dataset.option === selValue) {
+                sehirler.appendChild(options2[i]);
+            }
+        }
+        $('#submit').attr("disabled", false);
+    }
+
+    giveSelection(ulkeler.value);
+</script>
+<script src="//cdn.ckeditor.com/4.11.2/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('Icerik');
+</script>
 

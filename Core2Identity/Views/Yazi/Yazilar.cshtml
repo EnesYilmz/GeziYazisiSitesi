@@ -18,20 +18,21 @@
 
                     <div class="entry clearfix">
                         <div class="entry-image">
-                            <a asp-action="Oku" asp-route-id="@item.YaziId" data-lightbox="image"><img class="image_fade" src="~/img/@Html.DisplayFor(modelItem => item.Resim)" alt="@Html.DisplayFor(modelItem => item.Baslik)"></a>
+                            <a asp-action="Oku" asp-route-id="@item.YaziId"><img class="image_fade" src="~/img/@Html.DisplayFor(modelItem => item.Resim)" alt="@Html.DisplayFor(modelItem => item.Baslik)"></a>
                         </div>
                         <div class="entry-title">
-                            <h2><a href="blog-single.html">@Html.DisplayFor(modelItem => item.Baslik)</a></h2>
+                            <h2><a asp-action="Oku" asp-route-id="@item.YaziId">@Html.DisplayFor(modelItem => item.Baslik)</a></h2>
                         </div>
                         <ul class="entry-meta clearfix">
+                            <li><a href="#"><i class="fa fa-plane"></i> @Model.Item2.FirstOrDefault(i => i.SehirId == item.SehirId).Ad  </a></li>
                             <li><i class="icon-calendar3"></i> @Html.DisplayFor(modelItem => item.Tarih)</li>
                             <li><a href="blog-single.html#comments"><i class="icon-comments"></i> @Html.DisplayFor(modelItem => item.YorumSayisi)</a></li>
                             <li><a href="blog-single.html#comments"><i class="fa fa-thumbs-o-up"></i> @Html.DisplayFor(modelItem => item.BegenmeSayisi)</a></li>
                             <li><a href="blog-single.html#comments"><i class="fa fa-eye"></i> @Html.DisplayFor(modelItem => item.Goruntulenme)</a></li>
-                            <li><a href="#"><i class="fa fa-plane"></i> @Model.Item2.FirstOrDefault(i => i.SehirId == item.SehirId).Ad  </a></li>
+
                         </ul>
                         <div class="entry-content">
-                            <p>@Html.DisplayFor(modelItem => item.Icerik)</p>
+                            <p>@if (item.Icerik.Length >= 200) { @Html.Raw(item.Icerik.ToString().Substring(0, 200)) } else { @Html.Raw(item.Icerik) } </p>
                             <a asp-action="Oku" asp-route-id="@item.YaziId" class="more-link">Devamını Oku</a>
                         </div>
                     </div>

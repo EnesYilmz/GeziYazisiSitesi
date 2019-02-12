@@ -21,13 +21,14 @@ namespace Core2Identity.Controllers
         }
         public IActionResult Index()
         {
-            return View(context.Yazi);
+            return View(context.Yazi.OrderByDescending(i => i.Tarih));
         }
 
         [HttpGet]
         public IActionResult Yaz()
         {
-            ViewBag.Sehirler = new SelectList(context.Sehir, "SehirId", "Ad");
+            ViewBag.Ulkeler = context.Ulke.ToList();
+            ViewBag.Sehirler = context.Sehir.ToList();
             return View();
         }
 
@@ -35,38 +36,44 @@ namespace Core2Identity.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Yaz(Yazi entity, IFormFile file)
         {
-            ViewBag.Sehirler = new SelectList(context.Sehir, "SehirId", "Ad");
+            ViewBag.Ulkeler = context.Ulke.ToList();
+            ViewBag.Sehirler = context.Sehir.ToList();
             if (ModelState.IsValid)
             {
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", file.FileName);
-                using (var stream = new FileStream(path, FileMode.Create))
+                if (file != null)
                 {
-                    await file.CopyToAsync(stream);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", file.FileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                    entity.Resim = file.FileName;
+                    entity.Tarih = DateTime.Now;
+                    entity.Onay = false;
+                    entity.BegenmeSayisi = 0;
+                    entity.Goruntulenme = 0;
+                    entity.YorumSayisi = 0;
+                    entity.ApplicationUserId = context.Users.FirstOrDefault().Id; //Kayıtlı bir üyenin idsi kullanılıyor.
+                    context.Yazi.Add(entity);
+                    context.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                entity.Resim = file.FileName;
-                entity.Tarih = DateTime.Now;
-                entity.Onay = false;
-                entity.BegenmeSayisi = 0;
-                entity.Goruntulenme = 0;
-                entity.YorumSayisi = 0;
-                entity.ApplicationUserId = context.Users.FirstOrDefault().Id; //Kayıtlı bir üyenin idsi kullanılıyor.
-                context.Yazi.Add(entity);
-                context.SaveChanges();
-                return RedirectToAction("Index");
+                ViewBag.ResimHata = "Resim Ekleyiniz...";
             }
             return View(entity);
         }
 
         public IActionResult Yazilar()
         {
-            return View(Tuple.Create(context.Yazi.OrderByDescending(i => i.Tarih), context.Sehir.ToList()));
+            return View(Tuple.Create(context.Yazi.Where(i => i.Onay == true).OrderByDescending(i => i.Tarih), context.Sehir.ToList()));
         }
 
         public IActionResult Oku(int id)
         {
             var yazi = context.Yazi.SingleOrDefault(i => i.YaziId == id);
             ViewBag.Sehir = context.Sehir.FirstOrDefault(i => i.SehirId == yazi.SehirId).Ad;
-            return View(yazi);
+            ViewBag.Yazar = context.Users.FirstOrDefault(i => i.Id == yazi.ApplicationUserId).UserName;
+            return View(Tuple.Create(yazi,context.Yazi.Where(i => i.SehirId == yazi.SehirId && i.YaziId != yazi.YaziId && i.Onay == true).OrderByDescending(i => i.Tarih).Take(3)));
         }
 
         [HttpGet]
@@ -86,14 +93,17 @@ namespace Core2Identity.Controllers
 
                 if (yazi != null)
                 {
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", file.FileName);
-                    using (var stream = new FileStream(path, FileMode.Create))
+                    if (file != null)
                     {
-                        await file.CopyToAsync(stream);
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", file.FileName);
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+                        yazi.Resim = file.FileName;
                     }
                     yazi.Baslik = entity.Baslik;
-                    yazi.Icerik = entity.Icerik;
-                    yazi.Resim = file.FileName;
+                    yazi.Icerik = entity.Icerik;                   
                     context.SaveChanges();
                 }
 
@@ -119,6 +129,22 @@ namespace Core2Identity.Controllers
                 context.SaveChanges();
             }
 
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Onayla(int id)
+        {
+            var yazi = context.Yazi.SingleOrDefault(i => i.YaziId == id);
+            yazi.Onay = true;
+            context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Reddet(int id)
+        {
+            var yazi = context.Yazi.SingleOrDefault(i => i.YaziId == id);
+            yazi.Onay = false;
+            context.SaveChanges();
             return RedirectToAction("Index");
         }
     }
