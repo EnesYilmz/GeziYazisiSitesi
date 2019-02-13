@@ -16,12 +16,6 @@
                 @Html.DisplayNameFor(model => model.Baslik)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Icerik)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resim)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Tarih)
             </th>
             <th>
@@ -47,12 +41,6 @@
                 @Html.DisplayFor(modelItem => item.Baslik)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Icerik)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Resim)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Tarih)
             </td>
             <td>
@@ -68,6 +56,8 @@
                 @Html.DisplayFor(modelItem => item.Goruntulenme)
             </td>
             <td>
+                <a asp-action="Onayla" asp-route-id="@item.YaziId">Onayla</a> |
+                <a asp-action="Reddet" asp-route-id="@item.YaziId">Reddet</a> |
                 <a asp-action="Oku" asp-route-id="@item.YaziId">Oku</a> |
                 <a asp-action="Duzenle" asp-route-id="@item.YaziId">Düzenle</a> |
                 <a asp-action="Sil" asp-route-id="@item.YaziId">Sil</a>

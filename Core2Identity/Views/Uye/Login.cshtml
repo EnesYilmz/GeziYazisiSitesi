@@ -1,0 +1,70 @@
+﻿@model Core2Identity.Models.Uye
+@{
+    ViewData["Title"] = "UyeEkle";
+}
+
+<section id="page-title">
+    <div class="container clearfix center">
+        <h1>Kayıt Ol</h1>
+    </div>
+</section>
+
+
+<section id="content">
+
+    <div class="content-wrap nopadding">
+
+
+        <div class="section nobg full-screen nopadding nomargin">
+            <div class="container-fluid vertical-middle divcenter clearfix">
+
+
+
+                <div class="card divcenter noradius noborder" style="max-width: 400px;">
+                    <div class="card-body" style="padding: 40px;">
+                        <div class="center"><h3> KAYIT OL</h3></div>
+
+                        <form asp-action="Login" method="post" class="m-1 p-1">
+                            <div class="text-danger" asp-validation-summary="All"></div>
+
+
+                          
+                           
+                            <div class="form-group row">
+                                <label asp-for="Sifre">Sifre</label>
+                                <input asp-for="Sifre" class="form-control" />
+
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label asp-for="Email"></label>
+                                <input asp-for="Email" class="form-control" />
+
+
+                            </div>
+
+                            <a asp-action="Index">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit" value="Kayıt Ol">Kayıt Ol</button>
+                            </a>
+
+                        </form>
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+

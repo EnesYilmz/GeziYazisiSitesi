@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core2Identity.Models
 {
-    public class ApplicationIdentityDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationIdentityDbContext : DbContext
     {
         public ApplicationIdentityDbContext(DbContextOptions<ApplicationIdentityDbContext> options)
             : base(options)
@@ -16,6 +16,7 @@ namespace Core2Identity.Models
 
         }
 
+        public DbSet<Uye> Uye { get; set; }
         public DbSet<Yazi> Yazi { get; set; }
 
         public DbSet<Ulke> Ulke { get; set; }

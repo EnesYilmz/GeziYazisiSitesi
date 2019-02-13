@@ -16,7 +16,6 @@ namespace GeziYazisiSitesi.Modals
         public string Baslik { get; set; }
         [Required(ErrorMessage = "İçerik giriniz...")]
         public string Icerik { get; set; }
-        [Required(ErrorMessage = "Resim giriniz...")]
         public string Resim { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
@@ -34,8 +33,8 @@ namespace GeziYazisiSitesi.Modals
 
         public Sehir Sehir { get; set; }
 
-        public string ApplicationUserId { get; set; }
+        public int UyeId { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
+        public Uye Uye { get; set; }
     }
 }
