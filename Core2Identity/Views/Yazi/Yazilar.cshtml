@@ -26,8 +26,8 @@
                         <ul class="entry-meta clearfix">
                             <li><a href="#"><i class="fa fa-plane"></i> @Model.Item2.FirstOrDefault(i => i.SehirId == item.SehirId).Ad  </a></li>
                             <li><i class="icon-calendar3"></i> @Html.DisplayFor(modelItem => item.Tarih)</li>
-                            <li><a href="blog-single.html#comments"><i class="icon-comments"></i> @Html.DisplayFor(modelItem => item.YorumSayisi)</a></li>
-                            <li><a href="blog-single.html#comments"><i class="fa fa-thumbs-o-up"></i> @Html.DisplayFor(modelItem => item.BegenmeSayisi)</a></li>
+                            <li class="d-none d-sm-block"><a href="blog-single.html#comments"><i class="icon-comments"></i> @Html.DisplayFor(modelItem => item.YorumSayisi)</a></li>
+                            <li class="d-none d-sm-block"><a href="blog-single.html#comments"><i class="fa fa-thumbs-o-up"></i> @Html.DisplayFor(modelItem => item.BegenmeSayisi)</a></li>
                             <li><a href="blog-single.html#comments"><i class="fa fa-eye"></i> @Html.DisplayFor(modelItem => item.Goruntulenme)</a></li>
 
                         </ul>

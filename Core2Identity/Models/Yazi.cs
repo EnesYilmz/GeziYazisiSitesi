@@ -33,8 +33,8 @@ namespace GeziYazisiSitesi.Modals
 
         public Sehir Sehir { get; set; }
 
-        public string ApplicationUserId { get; set; }
+        public int UyeId { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
+        public Uye Uye { get; set; }
     }
 }

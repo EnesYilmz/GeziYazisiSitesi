@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core2Identity.Infrastructure;
 using Core2Identity.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,22 +30,6 @@ namespace Core2Identity
 
             services.AddDbContext<ApplicationIdentityDbContext>(options =>
                                                           options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IPasswordValidator<ApplicationUser>, CustomPasswordValidator>(); /*Hata mesajları gelecekse custompasswordvalidator hataları gelsşn demek.*/
-            services.AddTransient<IUserValidator<ApplicationUser>, CustomUserValidator>();
-            services.AddIdentity<ApplicationUser, IdentityRole>(options=>
-            {
-                options.User.AllowedUserNameCharacters = "abcdefghğhılk"; //username de içerecek harfler yazılmıştır.
-                options.User.RequireUniqueEmail = true; //email tek olması için
-                options.Password.RequiredLength = 7;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireDigit = false;
-                
-
-            })
-                .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
-                .AddDefaultTokenProviders();
             services.AddMvc();
         }
 

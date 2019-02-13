@@ -53,7 +53,7 @@ namespace Core2Identity.Controllers
                     entity.BegenmeSayisi = 0;
                     entity.Goruntulenme = 0;
                     entity.YorumSayisi = 0;
-                    entity.ApplicationUserId = context.Users.FirstOrDefault().Id; //Kayıtlı bir üyenin idsi kullanılıyor.
+                    entity.UyeId = context.Uye.FirstOrDefault().UyeId; //Kayıtlı bir üyenin idsi kullanılıyor.
                     context.Yazi.Add(entity);
                     context.SaveChanges();
                     return RedirectToAction("Index");
@@ -72,7 +72,7 @@ namespace Core2Identity.Controllers
         {
             var yazi = context.Yazi.SingleOrDefault(i => i.YaziId == id);
             ViewBag.Sehir = context.Sehir.FirstOrDefault(i => i.SehirId == yazi.SehirId).Ad;
-            ViewBag.Yazar = context.Users.FirstOrDefault(i => i.Id == yazi.ApplicationUserId).UserName;
+            ViewBag.Yazar = context.Uye.FirstOrDefault(i => i.UyeId == yazi.UyeId).Ad;
             return View(Tuple.Create(yazi,context.Yazi.Where(i => i.SehirId == yazi.SehirId && i.YaziId != yazi.YaziId && i.Onay == true).OrderByDescending(i => i.Tarih).Take(3)));
         }
 
