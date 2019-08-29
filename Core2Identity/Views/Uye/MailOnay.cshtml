@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "MailOnay";
+}
+
+<section id="page-title">
+    <div class="container clearfix">
+        <!-- Entry Title
+            ============================================= -->
+        <div class="entry-title">
+            <h2>LÜTFEN E-POSTA ADRESİNİZİ ONAYLAYIN</h2>
+        </div><!-- .entry-title end -->
+    </div>
+</section>
+
+<section id="content">
+
+    <div class="content-wrap">
+
+        <div class="container clearfix">
+
+            <p>Üyeliğiniz başarıyla oluşturuldu.</p>
+            <br />
+            <p>Giriş yapabilmek için size gönderdiğimiz e-postadaki bağlantıya tıklayınız.</p>
+            <br />
+            <a asp-action="Login" asp-controller="Uye">Giriş Yap</a>
+
+        </div>
+    </div>
+
+</section><!-- #content end -->

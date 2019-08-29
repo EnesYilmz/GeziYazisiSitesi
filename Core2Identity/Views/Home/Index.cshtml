@@ -1,52 +1,130 @@
-﻿@*@{
-        ViewData["Title"] = "Index";
-    }
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Http;
+@model Tuple<IQueryable<GeziYazisiSitesi.Modals.Yazi>, List<GeziYazisiSitesi.Modals.Sehir>>
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+<section id="slider" class="slider-element slider-parallax swiper_wrapper clearfix">
 
-    <h2>Index</h2>
+    <div class="swiper-container swiper-parent">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide dark" style="background-image: url('images/slider/swiper/1.jpg');">
+                <div class="container clearfix">
+                    <div class="slider-caption slider-caption-center">
+                        <h2 data-caption-animate="fadeInUp">SİTEMİZE HOŞGELDİNİZ</h2>
+                        @*<p class="d-none d-sm-block" data-caption-animate="fadeInUp" data-caption-delay="200">Create just what you need for your Perfect Website. Choose from a wide range of Elements &amp; simply put them on our Canvas.</p>*@
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" style="background-image: url('images/slider/swiper/2.jpg'); background-position: center top;">
+                <div class="container clearfix">
+                    <div class="slider-caption">
+                        <h2 data-caption-animate="fadeInUp">YENİ YERLER KEŞFEDİN</h2>
+                        @*<p class="d-none d-sm-block" data-caption-animate="fadeInUp" data-caption-delay="200">You'll be surprised to see the Final Results of your Creation &amp; would crave for more.</p>*@
+                    </div>
+                </div>
+            </div>
+            @*<div class="swiper-slide dark" style="background-image: url('images/slider/swiper/3.jpg');">
+                <div class="container clearfix">
+                    <div class="slider-caption slider-caption-center">
+                        <h2 data-caption-animate="fadeInUp">DENEME</h2>
+                                        </div>
+                </div>
+            </div>*@
+            <div class="swiper-slide dark" style="background-image: url('images/slider/swiper/11.jpg');">
+                <div class="container clearfix">
+                    <div class="slider-caption slider-caption-center">
+                        <h2 data-caption-animate="fadeInUp">Baharı Yaşayın</h2>
+                        @*<p class="d-none d-sm-block" data-caption-animate="fadeInUp" data-caption-delay="200">Create just what you need for your Perfect Website. Choose from a wide range of Elements &amp; simply put them on our Canvas.</p>*@
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide dark" style="background-image: url('images/slider/swiper/13.jpg');">
+                <div class="container clearfix">
+                    <div class="slider-caption slider-caption-center">
+                        <h2 data-caption-animate="fadeInUp"></h2>
+                        @*<p class="d-none d-sm-block" data-caption-animate="fadeInUp" data-caption-delay="200">Create just what you need for your Perfect Website. Choose from a wide range of Elements &amp; simply put them on our Canvas.</p>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-arrow-left"><i class="icon-angle-left"></i></div>
+        <div class="slider-arrow-right"><i class="icon-angle-right"></i></div>
+        <div class="slide-number"><div class="slide-number-current"></div><span>/</span><div class="slide-number-total"></div></div>
+    </div>
 
-    @if (User.Identity.IsAuthenticated) //Kayıt var mı ?
-    {
-        <span>@User.Identity.Name</span><br />
-        @if (User.IsInRole("Admin")) //Rolle sahipmi??
+</section>
+
+<!-- Content
+        ============================================= -->
+<section id="content">
+
+    <div class="content-wrap">
+
+        @if (Context.Session.GetInt32("UyeId") == null)
         {
-            <div>Admin İçeriği</div>
+            <a asp-action="UyeEkle" asp-controller="Uye" class="button button-full button-purple center tright header-stick bottommargin-lg">
+                <div class="container clearfix">
+                    Kayıt olup sende bildiğin yerleri diğer insanlarla paylaşabilirsin. <strong>Kayıt Ol</strong> <i class="icon-caret-right" style="top:4px;"></i>
+                </div>
+            </a>
+        }
+        else
+        {
+            <a asp-action="Yaz" asp-controller="Yazi" class="button button-full button-purple center tright header-stick bottommargin-lg">
+                <div class="container clearfix">
+                    Yazı yazıp bildiğin yerleri diğer insanlarla paylaşabilirsin. <strong>Yazı Yaz</strong> <i class="icon-caret-right" style="top:4px;"></i>
+                </div>
+            </a>
         }
 
 
-        <a asp-action="Logout" asp-controller="Account" class="btn btn-danger">
-            Oturumu Kapat
-        </a>
+        <div class="container clearfix">
 
-    }
-    else
-    {
-        <a asp-action="Login" asp-controller="Account" class="btn btn-success">
-            Oturumu Aç
-        </a>
-        <a asp-action="Login" asp-controller="Account" class="btn btn-primary">
-            Kayıt Ol
-        </a>
-    }*@
+            <div class="heading-block center">
+                <h1><a asp-action="Yazilar" asp-controller="Yazi">En Son Yayınlanan Yazılar</a></h1>
+                @*<span>We almost blog regularly about this &amp; that.</span>*@
+            </div>
+        </div>
 
 
+        <!-- Posts
+    ============================================= -->
+        <div id="posts" class="post-grid grid-container post-masonry post-masonry-full grid-3 clearfix">
 
+            @foreach (var item in Model.Item1)
+            {
+                <div class="entry clearfix">
+                    <div class="entry-image">
+                        <a asp-action="YaziOku" asp-controller="Yazi" asp-route-id="@item.YaziId"><img class="image_fade" src="~/img/@item.Resim"></a>
+                    </div>
+                    <div class="entry-title">
+                        <h2><a asp-action="YaziOku" asp-controller="Yazi" asp-route-id="@item.YaziId">@item.Baslik</a></h2>
+                    </div>
+                    <ul class="entry-meta clearfix">
+                        <li><a href="@Url.Action("Yazilar","Yazi", new { sehir = item.SehirId })"><i class="fa fa-plane"></i> @Html.DisplayFor(modelItem => item.Sehir.Ad)  </a></li>
+                        <li><i class="icon-calendar3"></i> @Html.DisplayFor(modelItem => item.Tarih)</li>
+                        <li class="d-none d-sm-block"><i class="icon-comments"></i> @Html.DisplayFor(modelItem => item.YorumSayisi)</li>
+                        <li><i class="fa fa-thumbs-o-up"></i> @Html.DisplayFor(modelItem => item.BegenmeSayisi)</li>
+                        <li><i class="fa fa-eye"></i> @Html.DisplayFor(modelItem => item.Goruntulenme)</li>
+                    </ul>
+                    <div class="entry-content">
+                        @if (item.Icerik.Length >= 200)
+                        {@Html.Raw(item.Icerik.ToString().Substring(0, 200)) }
+                    else
+                    { @Html.Raw(item.Icerik)}
+                    </div>
+                    <a asp-action="YaziOku" asp-controller="Yazi" asp-route-id="@item.YaziId" class="more-link">Devamını Oku</a>
+                </div>
+            }
 
+        </div>
 
-@*@if (!User.Identity.IsAuthenticated)
-{
+    </div><!-- #posts end -->
+    <!-- Sidebar
+    ============================================= -->
+    <div class="sidebar nobottommargin col_last clearfix">
 
+    </div><!-- .sidebar end -->
 
-
-    <a asp-action="Login" asp-controller="Account" class="btn btn-secondary d-none d-md-inline-block ">Login</a>
-
-    <a asp-action="Login" asp-controller="Account" class="btn btn-secondary d-inline-block d-md-none "><i class="icon-lock"></i></a>
-
-}
-
-else
-{
-    <a asp-action="Logout" asp-controller="Account" class="btn btn-danger ">
-        Oturumu Kapat
-    </a>
-
-}*@
+</section><!-- #content end -->

@@ -62,25 +62,28 @@
         </div>
     </div>
 </section>
-<script>
-    var ulkeler = document.querySelector('#ulkeler');
-    var sehirler = document.querySelector('#sehirler');
-    var options2 = sehirler.querySelectorAll('option');
+@section scripts{
+    <script>
+        var ulkeler = document.querySelector('#ulkeler');
+        var sehirler = document.querySelector('#sehirler');
+        var options2 = sehirler.querySelectorAll('option');
 
-    function giveSelection(selValue) {
-        sehirler.innerHTML = '';    
-        for (var i = 0; i < options2.length; i++) {
-            if (options2[i].dataset.option === selValue) {
-                sehirler.appendChild(options2[i]);
+        function giveSelection(selValue) {
+            sehirler.innerHTML = '';
+            for (var i = 0; i < options2.length; i++) {
+                if (options2[i].dataset.option === selValue) {
+                    sehirler.appendChild(options2[i]);
+                }
             }
+            $('#submit').attr("disabled", false);
         }
-        $('#submit').attr("disabled", false);
-    }
 
-    giveSelection(ulkeler.value);
-</script>
-<script src="//cdn.ckeditor.com/4.11.2/standard/ckeditor.js"></script>
-<script>
-    CKEDITOR.replace('Icerik');
-</script>
-
+        giveSelection(ulkeler.value);
+    </script>
+    <script src="@Url.Content("~/ckeditor/ckeditor.js")"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace('Icerik', {
+            entermode: CKEDITOR.ENTER_BR,
+        });
+    </script>
+}

@@ -17,12 +17,16 @@ namespace Core2Identity.Models
         }
 
         public DbSet<Uye> Uye { get; set; }
+
         public DbSet<Yazi> Yazi { get; set; }
 
         public DbSet<Ulke> Ulke { get; set; }
 
         public DbSet<Sehir> Sehir { get; set; }
 
+        public DbSet<Yorum> Yorum { get; set; }
+
+        public DbSet<Begen> Begen { get; set; }
     }
 
 }

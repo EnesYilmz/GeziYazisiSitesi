@@ -1,0 +1,54 @@
+﻿@model Uye
+@{
+    ViewData["Title"] = "SifreDegister";
+}
+<section id="content">
+    <div class="content-wrap">
+        <div class="container clearfix ">
+
+            <form asp-action="SifreDegister" method="post" enctype="multipart/form-data">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="UyeId" />
+                <div class="col_full">
+                    <label >Eski Şifre</label>
+                    <input name="EskiSifre" class="form-control not-dark" />
+                    <div class="text-danger">@ViewBag.Sifre</div>
+                    @*<input type="text" disabled="disabled" value="@Model.Sifre" class="form-control not-dark">*@
+                </div>
+                <div class="col_full">
+                    <label asp-for="Sifre">Sifre:</label>
+                    <input asp-for="Sifre" class="form-control not-dark" name="Sifre" />
+                    <div class="text-danger">@ViewBag.Bos</div>
+                </div>
+                <div class="col_full">
+                    <label>Tekrar Sifre:</label>
+                    <input class="form-control not-dark" type="password" id="verify" name="SifreTekrar" />
+                    <span id="verifynote" class="text-danger hidden">Şifreler uyuşmuyor!</span>
+
+                </div>
+           
+                <div class="form-group text-center">
+                    <button disabled id="Kayit" class="btn btn-dark nomargin" type="submit" value="Kayıt">Kayıt Ol</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#verify').keyup(function () {
+                if ($(this).val() == $('#Sifre').val()) {
+                    $('#verifynote').addClass('hidden');
+                    $('#Kayit').attr("disabled", false);
+                } else {
+                    $('#verifynote').removeClass('hidden');
+                    $('#Kayit').attr("disabled", true);
+                }
+            });
+        });</script>
+}

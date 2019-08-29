@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Uye>
+@using Microsoft.AspNetCore.Http;
+
+@{
+    ViewBag.Title = "TumUye";
+
+}
+
+<br />
+<br />
+
+<div class="container center">
+    <div class="col-md-8">
+        <div class="well">
+              @Html.Partial("BlogAraPartial")
+
+        </div>
+    </div>
+        <br />
+
+    </div>
+    <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <div class="table-responsive">
+                <table class="table">
+
+
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProfilFoto)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Ad)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SoyAd)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.Sifre)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Onay)
+                            </th>*@
+                        <th>
+                        </th>
+                    </tr>
+
+
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="~/img/@item.ProfilFoto" width="80" height="80" class="img-circle img-responsive" alt="" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ad)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SoyAd)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.Sifre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Onay)
+                                </td>*@
+
+                            <td>
+
+                                <a asp-action="UyeProfil" asp-route-id="@item.UyeId"><button class="btn-danger"><i class="fa fa-trash-o"></i> Detay</button></a>
+
+
+                            </td>
+                        </tr>
+                    }
+
+
+
+                </table>
+
+            </div>
+        </nav>
+
+
+    </div>
+
+

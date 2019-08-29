@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core2Identity.Models;
 using GeziYazisiSitesi.Modals;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -19,14 +20,28 @@ namespace Core2Identity.Controllers
         }
         public IActionResult Index()
         {
-            return View(context.Sehir);
+            if (HttpContext.Session.GetInt32("Yetki") == 1)
+            {
+                return View(context.Sehir);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Ulkeler = new SelectList(context.Ulke, "UlkeId", "Ad");
-            return View();
+            if (HttpContext.Session.GetInt32("Yetki") == 1)
+            {
+                ViewBag.Ulkeler = new SelectList(context.Ulke, "UlkeId", "Ad");
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [HttpPost]
@@ -34,7 +49,7 @@ namespace Core2Identity.Controllers
         public IActionResult Create(Sehir entity)
         {
             ViewBag.Ulkeler = new SelectList(context.Ulke, "UlkeId", "Ad");
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && HttpContext.Session.GetInt32("Yetki") == 1)
             {
                 context.Sehir.Add(entity);
                 context.SaveChanges();
@@ -62,7 +77,7 @@ namespace Core2Identity.Controllers
         public IActionResult Edit(Sehir entity)
         {
             ViewBag.Ulkeler = new SelectList(context.Ulke, "UlkeId", "Ad");
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && HttpContext.Session.GetInt32("Yetki") == 1)
             {
                 var sehir = context.Sehir.FirstOrDefault(i => i.SehirId == entity.SehirId);
                 if (sehir != null)
@@ -89,7 +104,7 @@ namespace Core2Identity.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             var sehir = context.Sehir.FirstOrDefault(i => i.SehirId == id);
-            if (sehir != null)
+            if (sehir != null && HttpContext.Session.GetInt32("Yetki") == 1)
             {
                 context.Sehir.Remove(sehir);
                 context.SaveChanges();

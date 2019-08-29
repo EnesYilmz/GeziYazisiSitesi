@@ -1,7 +1,94 @@
-﻿
+﻿@model IEnumerable<Uye>
+@using Microsoft.AspNetCore.Http;
+
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "Index";
+
 }
 
-<h2>Index</h2>
+<br />
+<br />
+
+<div class="container center">
+    <h2> </h2>
+
+    <br />
+
+</div>
+<div class="container">
+    <nav class="navbar navbar-light bg-light">
+        <div class="table-responsive">
+            <table class="table">
+
+                <thead class="thead-light">
+
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProfilFoto)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Ad)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SoyAd)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.Sifre)
+                        </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.Onay)
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                </thead>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="~/img/@item.ProfilFoto" width="80" height="80" class="img-circle img-responsive" alt="" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SoyAd)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Sifre)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Onay)
+                        </td>
+
+                        <td>
+                            <a asp-action="Sil" asp-route-id="@item.UyeId">Sil </a> |
+                            @*<a asp-action="Onayla" asp-route-id="@item.YaziId">Onayla</a> |
+                                <a asp-action="Reddet" asp-route-id="@item.YaziId">Reddet</a> |
+                                <a asp-action="Oku" asp-route-id="@item.YaziId">Oku</a> |*@
+                            <a asp-action="Edit" asp-route-id="@item.UyeId">Düzenle </a> |
+
+                        </td>
+                    </tr>
+                }
+
+
+
+            </table>
+
+        </div>
+    </nav>
+
+
+</div>
+
 

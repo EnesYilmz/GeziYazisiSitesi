@@ -23,16 +23,10 @@
                         @Html.DisplayFor(model => model.Baslik)
                     </dd>
                     <dt>
-                        @Html.DisplayNameFor(model => model.Icerik)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Icerik)
-                    </dd>
-                    <dt>
                         @Html.DisplayNameFor(model => model.Resim)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.Resim)
+                        <img src="~/img/@Html.DisplayFor(Model => Model.Resim)" width="256" alt="Blog Single">
                     </dd>
                     <dt>
                         @Html.DisplayNameFor(model => model.Tarih)

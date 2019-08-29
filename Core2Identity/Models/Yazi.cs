@@ -13,8 +13,10 @@ namespace GeziYazisiSitesi.Modals
         public int YaziId { get; set; }
 
         [Required(ErrorMessage = "Başlık giriniz...")]
+        [StringLength(60,ErrorMessage ="Başlık 60 karakterden az olmalıdır.")]
         public string Baslik { get; set; }
         [Required(ErrorMessage = "İçerik giriniz...")]
+        [StringLength(30000, ErrorMessage = "İçerik 30000 karakterden az olmalıdır.")]
         public string Icerik { get; set; }
         public string Resim { get; set; }
         [DataType(DataType.Date)]

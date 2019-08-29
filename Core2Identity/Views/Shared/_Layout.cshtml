@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Http;
+@using GeziYazisiSitesi.Modals
+<!DOCTYPE html>
 <html dir="ltr" lang="en-US">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -10,11 +13,13 @@
     <link rel="stylesheet" href="@Url.Content("~/css/bootstrap.css")" type="text/css" />
     <link rel="stylesheet" href="@Url.Content("~/css/style.css")" type="text/css" />
     <link rel="stylesheet" href="@Url.Content("~/css/font-awesome.min.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/swiper.css")" type="text/css" />
     <link rel="stylesheet" href="@Url.Content("~/css/dark.css")" type="text/css" />
     <link rel="stylesheet" href="@Url.Content("~/css/font-icons.css")" type="text/css" />
     <link rel="stylesheet" href="@Url.Content("~/css/animate.css")" type="text/css" />
     <link rel="stylesheet" href="@Url.Content("~/css/magnific-popup.css")" type="text/css" />
     <link rel="stylesheet" href="@Url.Content("~/css/calendar.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/myStyle.css")" type="text/css" />
 
     <link rel="stylesheet" href="@Url.Content("~/css/responsive.css")" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -64,368 +69,94 @@
                     <!-- Logo
                     ============================================= -->
                     <div id="logo">
-                        <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="images/logo.png" alt="Canvas Logo"></a>
-                        <a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="images/logo@2x.png" alt="Canvas Logo"></a>
+                        <a href="/" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="images/logo.png" alt="Canvas Logo"></a>
+                        <a href="/" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="images/logo@2x.png" alt="Canvas Logo"></a>
                     </div><!-- #logo end -->
+                    @if (Context.Session.GetInt32("UyeId") != null)
+                    {
+                        <div id="top-account" class="dropdown" style="margin-top:0px;margin-bottom:0px">
+                            <a href="#" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="icon-user"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">                      
+                                <a class="dropdown-item tleft" href="~/Uye/UyeProfil/@Context.Session.GetInt32("UyeId")"><i class="fa fa-user-circle-o"></i> Profil</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item tleft" asp-action="Yaz" asp-controller="Yazi"><i class="fa fa-pencil"></i> Yazı Yaz</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item tleft" href="~/Uye/Logout"><i class="icon-signout"></i> Çıkış Yap</a>
+                            </ul>
+                        </div>
+                    }
                     <!-- Primary Navigation
                     ============================================= -->
                     <nav id="primary-menu">
 
                         <ul>
                             <li>
-                                <a asp-controller="Yazi" asp-action="Index"><div>YAZI</div></a>
+                                <a asp-controller="Yazi" asp-action="Yazilar"><div>YAZILAR</div></a>
                                 <ul>
                                     <li>
-                                        <a asp-controller="Yazi" asp-action="Index"><div>Index</div></a>
+                                        <a asp-controller="Yazi" asp-action="Yazilar"><div>En Son Yayınlanan</div></a>
                                     </li>
                                     <li>
-                                        <a asp-controller="Yazi" asp-action="Yazilar"><div>Yazılar Sayfası</div></a>
+                                        <a asp-controller="Yazi" asp-action="Yazilar" asp-route-siralama="goruntulenme"><div>En Çok Okunan</div></a>
                                     </li>
                                     <li>
-                                        <a asp-controller="Yazi" asp-action="Yaz"><div>Yazı Yaz</div></a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><div>ADMİN</div></a>
-                                <ul>
-                                    <li>
-                                        <a asp-controller="Ulke" asp-action="Index"><div>Ülke</div></a>
+                                        <a asp-controller="Yazi" asp-action="Yazilar" asp-route-siralama="begenme"><div>En Çok Beğenilen</div></a>
                                     </li>
                                     <li>
-                                        <a asp-controller="Sehir" asp-action="Index"><div>Şehir</div></a>
+                                        <a asp-controller="Yazi" asp-action="Yazilar" asp-route-siralama="yorum"><div>En Çok Yorum Alan</div></a>
                                     </li>
 
                                 </ul>
                             </li>
-                            <li class="mega-menu">
-                                <a href="#"><div>Pages</div></a>
-                                <div class="mega-menu-content style-2 clearfix">
-                                    <ul class="mega-menu-column col-lg-3">
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Introduction</div></a>
-                                            <ul>
-                                                <li><a href="about.html"><div>About Us</div></a></li>
-                                                <li><a href="about-2.html"><div>About Us - Layout 2</div></a></li>
-                                                <li><a href="about-me.html"><div>About Me</div></a></li>
-                                                <li><a href="team.html"><div>Team Members</div></a></li>
-                                                <li><a href="jobs.html"><div>Careers</div></a></li>
-                                                <li><a href="side-navigation.html"><div>Side Navigation</div></a></li>
-                                                <li><a href="page-submenu.html"><div>Page Submenu</div></a></li>
-                                                <li><a href="sitemap.html"><div>Sitemap</div></a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="mega-menu-column col-lg-3">
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Utility</div></a>
-                                            <ul>
-                                                <li><a href="services.html"><div>Services - Layout 1</div></a></li>
-                                                <li><a href="services-2.html"><div>Services - Layout 2</div></a></li>
-                                                <li><a href="services-3.html"><div>Services - Layout 3</div></a></li>
-                                                <li><a href="faqs.html"><div>FAQs - Layout 1</div></a></li>
-                                                <li><a href="faqs-2.html"><div>FAQs - Layout 2</div></a></li>
-                                                <li><a href="faqs-3.html"><div>FAQs - Layout 3</div></a></li>
-                                                <li><a href="faqs-4.html"><div>FAQs - Layout 4</div></a></li>
-                                                <li><a href="maintenance.html"><div>Maintenance Page</div></a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="mega-menu-column col-lg-3">
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Layout Grids</div></a>
-                                            <ul>
-                                                <li><a href="full-width.html"><div>Full Width</div></a></li>
-                                                <li><a href="full-width-wide.html"><div>Full Width - Wide</div></a></li>
-                                                <li><a href="right-sidebar.html"><div>Right Sidebar</div></a></li>
-                                                <li><a href="left-sidebar.html"><div>Left Sidebar</div></a></li>
-                                                <li><a href="both-sidebar.html"><div>Both Sidebar</div></a></li>
-                                                <li><a href="both-right-sidebar.html"><div>Both Right Sidebar</div></a></li>
-                                                <li><a href="both-left-sidebar.html"><div>Both Left Sidebar</div></a></li>
-                                                <li><a href="blank-page.html"><div>Blank Page</div></a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="mega-menu-column col-lg-3">
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Miscellaneous</div></a>
-                                            <ul>
-                                                <li><a href="login-register.html"><div>Login/Register</div></a></li>
-                                                <li><a href="login-register-2.html"><div>Login/Register - Style 2</div></a></li>
-                                                <li><a href="login-register-3.html"><div>Login/Register - Style 3</div></a></li>
-                                                <li><a href="login-1.html"><div>Login - Style 1</div></a></li>
-                                                <li><a href="login-2.html"><div>Login - Style 2</div></a></li>
-                                                <li><a href="404.html"><div>404 - Simple Layout</div></a></li>
-                                                <li><a href="404-2.html"><div>404 - Parallax Image</div></a></li>
-                                                <li><a href="404-3.html"><div>404 - HTML5 Video</div></a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="mega-menu">
-                                <a href="#"><div>Portfolio</div></a>
-                                <div class="mega-menu-content style-2 clearfix">
-                                    <ul class="mega-menu-column col-5">
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Grids</div></a>
-                                            <ul>
-                                                <li><a href="portfolio-1.html"><div>1 Column</div></a></li>
-                                                <li><a href="portfolio-2.html"><div>2 Columns</div></a></li>
-                                                <li><a href="portfolio-3.html"><div>3 Columns</div></a></li>
-                                                <li><a href="portfolio.html"><div>4 Columns</div></a></li>
-                                                <li><a href="portfolio-5.html"><div>5 Columns</div></a></li>
-                                                <li><a href="portfolio-6.html"><div>6 Columns</div></a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="mega-menu-column col-5">
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Masonry</div></a>
-                                            <ul>
-                                                <li><a href="portfolio-mixed-masonry.html"><div>Mixed Columns</div></a></li>
-                                                <li><a href="portfolio-2-masonry.html"><div>2 Columns</div></a></li>
-                                                <li><a href="portfolio-3-masonry.html"><div>3 Columns</div></a></li>
-                                                <li><a href="portfolio-masonry.html"><div>4 Columns</div></a></li>
-                                                <li><a href="portfolio-5-masonry.html"><div>5 Columns</div></a></li>
-                                                <li><a href="portfolio-6-masonry.html"><div>6 Columns</div></a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="mega-menu-column col-5">
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Loading Styles</div></a>
-                                            <ul>
-                                                <li><a href="portfolio.html"><div>jQuery Filter</div></a></li>
-                                                <li><a href="portfolio-jpagination.html"><div>jQuery Pagination</div></a></li>
-                                                <li><a href="portfolio-infinity-scroll.html"><div>Infinity Scroll</div></a></li>
-                                                <li><a href="portfolio-ajax.html"><div>AJAX In Page</div></a></li>
-                                                <li><a href="portfolio-ajax-in-modal.html"><div>AJAX In Modal</div></a></li>
-                                                <li><a href="portfolio-filter-styles.html"><div>Filter Styles</div></a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="mega-menu-column col-5">
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Single Project</div></a>
-                                            <ul>
-                                                <li><a href="portfolio-single-extended.html"><div>Extended Item</div></a></li>
-                                                <li><a href="portfolio-single-fullwidth.html"><div>Parallax Image</div></a></li>
-                                                <li><a href="portfolio-single-gallery-full.html"><div>Slider Gallery</div></a></li>
-                                                <li><a href="portfolio-single-video-fullwidth-left-sidebar.html"><div>HTML5 Video</div></a></li>
-                                                <li><a href="portfolio-single-thumbs-right-sidebar.html"><div>Masonry Thumbs</div></a></li>
-                                                <li><a href="portfolio-single-video-both-sidebar.html"><div>Embed Video</div></a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="mega-menu-column col-5">
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Layouts</div></a>
-                                            <ul>
-                                                <li><a href="portfolio-nomargin.html"><div>Default</div></a></li>
-                                                <li><a href="portfolio-1-alt-right-sidebar.html"><div>Right Sidebar</div></a></li>
-                                                <li><a href="portfolio-3-left-sidebar.html"><div>Left Sidebar</div></a></li>
-                                                <li><a href="portfolio-2-both-sidebar.html"><div>Both Sidebar</div></a></li>
-                                                <li><a href="portfolio-fullwidth-notitle.html"><div>100% Width</div></a></li>
-                                                <li><a href="portfolio-parallax.html"><div>Parallax</div></a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="mega-menu">
-                                <a href="#"><div>Blog</div></a>
-                                <div class="mega-menu-content style-2 clearfix">
-                                    <ul class="mega-menu-column col-lg-3">
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Default</div></a>
-                                            <ul>
-                                                <li><a href="blog.html"><div>Right Sidebar</div></a></li>
-                                                <li><a href="blog-left-sidebar.html"><div>Left Sidebar</div></a></li>
-                                                <li><a href="blog-both-sidebar.html"><div>Both Sidebar</div></a></li>
-                                                <li><a href="blog-full-width.html"><div>Full Width</div></a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Timeline</div></a>
-                                            <ul>
-                                                <li><a href="blog-timeline-right-sidebar.html"><div>Right Sidebar</div></a></li>
-                                                <li><a href="blog-timeline-left-sidebar.html"><div>Left Sidebar</div></a></li>
-                                                <li><a href="blog-timeline.html"><div>Full Width</div></a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="mega-menu-column col-lg-3">
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Masonry</div></a>
-                                            <ul>
-                                                <li><a href="blog-masonry.html"><div>4 Columns</div></a></li>
-                                                <li><a href="blog-masonry-3.html"><div>3 Columns</div></a></li>
-                                                <li><a href="blog-masonry-2.html"><div>2 Columns</div></a></li>
-                                                <li><a href="blog-masonry-full.html"><div>100% Width</div></a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Grid</div></a>
-                                            <ul>
-                                                <li><a href="blog-grid.html"><div>4 Columns</div></a></li>
-                                                <li><a href="blog-grid-3.html"><div>3 Columns</div></a></li>
-                                                <li><a href="blog-grid-2.html"><div>2 Columns</div></a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="mega-menu-column col-lg-3">
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Small Thumbs</div></a>
-                                            <ul>
-                                                <li><a href="blog-small-left-sidebar.html"><div>Left Sidebar</div></a></li>
-                                                <li><a href="blog-small.html"><div>Right Sidebar</div></a></li>
-                                                <li><a href="blog-small-both-sidebar.html"><div>Both Sidebar</div></a></li>
-                                                <li><a href="blog-small-full-width.html"><div>Full Width</div></a></li>
-                                                <li><a href="blog-small-alt.html"><div>Alternate Layout</div></a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Item Splitting</div></a>
-                                            <ul>
-                                                <li><a href="blog-grid.html"><div>Pagination</div></a></li>
-                                                <li><a href="blog-masonry.html"><div>Infinite Scroll</div></a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="mega-menu-column col-lg-3">
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Single</div></a>
-                                            <ul>
-                                                <li><a href="blog-single.html"><div>Default Layout</div></a></li>
-                                                <li><a href="blog-single-left-sidebar.html"><div>Left Sidebar</div></a></li>
-                                                <li><a href="blog-single-full.html"><div>Full Width</div></a></li>
-                                                <li><a href="blog-single-small.html"><div>Small Image</div></a></li>
-                                                <li><a href="blog-single-split-right-sidebar.html"><div>Split Layout</div></a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="mega-menu-title">
-                                            <a href="#"><div>Comments Module</div></a>
-                                            <ul>
-                                                <li><a href="blog-single-left-sidebar.html#comments"><div>Facebook Comments</div></a></li>
-                                                <li><a href="blog-single-small.html#comments"><div>Disqus Comments</div></a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
+                            @await Component.InvokeAsync("SehirListe")
+                            <li>
+                                <a asp-action="TumUye" asp-controller="Uye"><div>KULLANICILAR</div></a>
                             </li>
                             <li>
-                                <a href="shop.html"><div>Shop</div></a>
-                                <ul>
-                                    <li><a href="shop.html"><div>4 Columns</div></a></li>
-                                    <li>
-                                        <a href="shop-3.html"><div>3 Columns</div></a>
-                                        <ul>
-                                            <li><a href="shop-3.html"><div>Full Width</div></a></li>
-                                            <li><a href="shop-3-right-sidebar.html"><div>Right Sidebar</div></a></li>
-                                            <li><a href="shop-3-left-sidebar.html"><div>Left Sidebar</div></a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="shop-2.html"><div>2 Columns</div></a>
-                                        <ul>
-                                            <li><a href="shop-2-right-sidebar.html"><div>Right Sidebar</div></a></li>
-                                            <li><a href="shop-2-left-sidebar.html"><div>Left Sidebar</div></a></li>
-                                            <li><a href="shop-2-both-sidebar.html"><div>Both Sidebar</div></a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="shop-1.html"><div>1 Columns</div></a>
-                                        <ul>
-                                            <li><a href="shop-1.html"><div>Full Width</div></a></li>
-                                            <li><a href="shop-1-right-sidebar.html"><div>Right Sidebar</div></a></li>
-                                            <li><a href="shop-1-left-sidebar.html"><div>Left Sidebar</div></a></li>
-                                            <li><a href="shop-1-both-sidebar.html"><div>Both Sidebar</div></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="shop-category-parallax.html"><div>Categories - Parallax</div></a></li>
-                                    <li><a href="shop-combination-filter.html"><div>Combination Filter</div></a></li>
-                                    <li>
-                                        <a href="shop-single.html"><div>Single Product</div></a>
-                                        <ul>
-                                            <li><a href="shop-single.html"><div>Full Width</div></a></li>
-                                            <li><a href="shop-single-right-sidebar.html"><div>Right Sidebar</div></a></li>
-                                            <li><a href="shop-single-left-sidebar.html"><div>Left Sidebar</div></a></li>
-                                            <li><a href="shop-single-both-sidebar.html"><div>Both Sidebar</div></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="cart.html"><div>Cart</div></a></li>
-                                    <li><a href="checkout.html"><div>Checkout</div></a></li>
-                                </ul>
+                                <a asp-action="Iletisim"><div>İLETİŞİM</div></a>
                             </li>
-                            <li class="mega-menu">
-                                <a href="#"><div>Shortcodes</div></a>
-                                <div class="mega-menu-content clearfix">
-                                    <ul class="mega-menu-column col-5">
-                                        <li><a href="animations.html"><div><i class="icon-magic"></i>Animations</div></a></li>
-                                        <li><a href="buttons.html"><div><i class="icon-link"></i>Buttons</div></a></li>
-                                        <li><a href="carousel.html"><div><i class="icon-heart3"></i>Carousel</div></a></li>
-                                        <li><a href="charts.html"><div><i class="icon-bar-chart"></i>Charts</div></a></li>
-                                        <li><a href="clients.html"><div><i class="icon-apple"></i>Clients</div></a></li>
-                                        <li><a href="columns-grids.html"><div><i class="icon-th-large"></i>Columns</div></a></li>
-                                        <li><a href="counters.html"><div><i class="icon-time"></i>Counters</div></a></li>
-                                        <li><a href="component-datatable.html"><div><i class="icon-table"></i>Data Tables</div></a></li>
-                                        <li><a href="component-datepicker.html"><div><i class="icon-calendar3"></i>Date &amp; Time Pickers</div></a></li>
+                            @if (Context.Session.GetInt32("Yetki") == 1)
+                            {
+                                <li>
+                                    <a href="#"><div>ADMİN</div></a>
+                                    <ul>
+                                        <li>
+                                            <a asp-controller="Yazi" asp-action="Index"><div>Yazi</div></a>
+                                        </li>
+                                        <li>
+                                            <a asp-controller="Uye" asp-action="Index"><div>Üye</div></a>
+                                        </li>
+                                        <li>
+                                            <a asp-controller="Ulke" asp-action="Index"><div>Ülke</div></a>
+                                        </li>
+                                        <li>
+                                            <a asp-controller="Sehir" asp-action="Index"><div>Şehir</div></a>
+                                        </li>
+
                                     </ul>
-                                    <ul class="mega-menu-column col-5">
-                                        <li><a href="dividers.html"><div><i class="icon-indent-right"></i>Dividers</div></a></li>
-                                        <li><a href="featured-boxes.html"><div><i class="icon-lightbulb"></i>Icon Boxes</div></a></li>
-                                        <li><a href="gallery.html"><div><i class="icon-picture"></i>Galleries</div></a></li>
-                                        <li><a href="headings-dropcaps.html"><div><i class="icon-pencil2"></i>Heading Styles</div></a></li>
-                                        <li><a href="icon-lists.html"><div><i class="icon-list-alt"></i>Icon Lists</div></a></li>
-                                        <li><a href="labels-badges.html"><div><i class="icon-plus-sign"></i>Labels</div></a></li>
-                                        <li><a href="lightbox.html"><div><i class="icon-resize-full"></i>Lightbox</div></a></li>
-                                        <li><a href="form-elements.html"><div><i class="icon-edit"></i>Form Elements</div></a></li>
-                                        <li><a href="component-uploads.html"><div><i class="icon-line-upload"></i>File Uploads</div></a></li>
-                                    </ul>
-                                    <ul class="mega-menu-column col-5">
-                                        <li><a href="lists-cards.html"><div><i class="icon-th-list"></i>Lists &amp; Cards</div></a></li>
-                                        <li><a href="maps.html"><div><i class="icon-map-marker2"></i>Maps</div></a></li>
-                                        <li><a href="media-embeds.html"><div><i class="icon-play"></i>Media Embeds</div></a></li>
-                                        <li><a href="modal-popovers.html"><div><i class="icon-move"></i>Modal Boxes</div></a></li>
-                                        <li><a href="navigation.html"><div><i class="icon-align-justify2"></i>Navigations</div></a></li>
-                                        <li><a href="pagination-progress.html"><div><i class="icon-cogs"></i>Pagination</div></a></li>
-                                        <li><a href="pie-skills.html"><div><i class="icon-tasks"></i>Pies &amp; Skills</div></a></li>
-                                        <li><a href="component-range-slider.html"><div><i class="icon-line-move"></i>Range Slider</div></a></li>
-                                        <li><a href="component-ratings.html"><div><i class="icon-star3"></i>Star Ratings</div></a></li>
-                                    </ul>
-                                    <ul class="mega-menu-column col-5">
-                                        <li><a href="pricing.html"><div><i class="icon-dollar"></i>Pricing Boxes</div></a></li>
-                                        <li><a href="process-steps.html"><div><i class="icon-thumbs-up"></i>Process Steps</div></a></li>
-                                        <li><a href="promo-boxes.html"><div><i class="icon-rocket"></i>Promo Boxes</div></a></li>
-                                        <li><a href="quotes-blockquotes.html"><div><i class="icon-quote-left"></i>Blockquotes</div></a></li>
-                                        <li><a href="responsive.html"><div><i class="icon-laptop2"></i>Responsive</div></a></li>
-                                        <li><a href="sections.html"><div><i class="icon-folder-open"></i>Sections</div></a></li>
-                                        <li><a href="social-icons.html"><div><i class="icon-facebook2"></i>Social Icons</div></a></li>
-                                        <li><a href="component-select-picker.html"><div><i class="icon-select"></i>Select Picker</div></a></li>
-                                        <li><a href="component-select-box.html"><div><i class="icon-line-columns"></i>Select Boxes</div></a></li>
-                                    </ul>
-                                    <ul class="mega-menu-column col-5">
-                                        <li><a href="style-boxes.html"><div><i class="icon-exclamation-sign"></i>Alert Boxes</div></a></li>
-                                        <li><a href="styled-icons.html"><div><i class="icon-flag2"></i>Styled Icons</div></a></li>
-                                        <li><a href="tables.html"><div><i class="icon-table"></i>Tables</div></a></li>
-                                        <li><a href="tabs.html"><div><i class="icon-star3"></i>Tabs</div></a></li>
-                                        <li><a href="testimonials-twitter.html"><div><i class="icon-user4"></i>Testimonials</div></a></li>
-                                        <li><a href="thumbnails-slider.html"><div><i class="icon-camera3"></i>Thumbnails</div></a></li>
-                                        <li><a href="toggles-accordions.html"><div><i class="icon-ok-circle"></i>Toggles</div></a></li>
-                                        <li><a href="component-radios-switches.html"><div><i class="icon-line-square-check"></i>Radios &amp; Switches</div></a></li>
-                                        <li><a href="component-typeahead.html"><div><i class="icon-type"></i>Input Typeahead</div></a></li>
-                                    </ul>
-                                </div>
-                            </li>
+                                </li>
+                            }
+
                         </ul>
 
-                        <a href="~/Account/Login" class="btn btn-secondary d-none d-md-inline-block">Login</a>
+                        <div id="top-search">
+                            <a href="#" id="top-search-trigger" style="margin-right:20px"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
+                            <form asp-action="YaziAra" asp-controller="Yazi" method="get">
+                                <input type="text" name="arama" class="form-control" value="" placeholder="Yaz & Enter`a Bas..">
+                            </form>
+                        </div>
 
-                        <a href="~/Account/Login" class="btn btn-secondary d-inline-block d-md-none"><i class="icon-lock"></i></a>
+                        @if (Context.Session.GetInt32("UyeId") == null)
+                        {
 
-                    </nav><!-- #primary-menu end -->
+                            <a href="~/Uye/Login" style="margin-bottom:25px" class="btn btn-secondary d-none d-md-inline-block">Giriş Yap</a>
 
+                            <a href="~/Uye/Login" class="btn btn-secondary d-inline-block d-md-none"><i class="icon-lock"></i></a>
+
+                        }
+
+
+                    </nav>
                 </div>
 
             </div>
@@ -442,55 +173,12 @@
                 <div class="container clearfix">
 
                     <div class="col_half">
-                        <img src="images/footer-logo.png" alt="" class="footer-logo">
-
-                        Copyrights &copy; 2014 All Rights Reserved by Canvas Inc.
+                        Bizimkiler Geziyor &copy; @DateTime.Now.Year
                     </div>
 
                     <div class="col_half col_last tright">
                         <div class="copyrights-menu copyright-links fright clearfix">
-                            <a href="#">Home</a>/<a href="#">About</a>/<a href="#">Features</a>/<a href="#">Portfolio</a>/<a href="#">FAQs</a>/<a href="#">Contact</a>
-                        </div>
-                        <div class="fright clearfix">
-                            <a href="#" class="social-icon si-small si-borderless nobottommargin si-facebook">
-                                <i class="icon-facebook"></i>
-                                <i class="icon-facebook"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-borderless nobottommargin si-twitter">
-                                <i class="icon-twitter"></i>
-                                <i class="icon-twitter"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-borderless nobottommargin si-gplus">
-                                <i class="icon-gplus"></i>
-                                <i class="icon-gplus"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-borderless nobottommargin si-pinterest">
-                                <i class="icon-pinterest"></i>
-                                <i class="icon-pinterest"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-borderless nobottommargin si-vimeo">
-                                <i class="icon-vimeo"></i>
-                                <i class="icon-vimeo"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-borderless nobottommargin si-github">
-                                <i class="icon-github"></i>
-                                <i class="icon-github"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-borderless nobottommargin si-yahoo">
-                                <i class="icon-yahoo"></i>
-                                <i class="icon-yahoo"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-borderless nobottommargin si-linkedin">
-                                <i class="icon-linkedin"></i>
-                                <i class="icon-linkedin"></i>
-                            </a>
+                            <a href="/">Ana Sayfa</a>/<a asp-action="Yazilar" asp-controller="Yazi">Yazılar</a>/<a asp-action="TumUye" asp-controller="Uye">Kullanıcılar</a>/<a asp-action="Iletisim" asp-controller="Home">İletişim</a>
                         </div>
                     </div>
 
@@ -513,6 +201,8 @@
     <!-- Footer Scripts
     ============================================= -->
     <script src="@Url.Content("~/js/functions.js")"></script>
+
+    @RenderSection("scripts", false)
 
 </body>
 </html>

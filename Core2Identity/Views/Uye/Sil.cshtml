@@ -1,0 +1,153 @@
+﻿@model Uye
+@{
+    ViewData["Title"] = "Sil";
+}
+
+<section id="page-title">
+    <div class="container clearfix">
+        <h1>Uye SİL</h1>
+    </div>
+</section>
+
+<section id="content">
+    <div class="content-wrap">
+        <div class="container clearfix ">
+            <h3>Uyeyi silmek istediğinizden emin misiniz ?</h3>
+            <div>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ProfilFoto)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ProfilFoto)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Ad)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Ad)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SoyAd)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.SoyAd)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Sifre)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Sifre)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Onay)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Onay)
+                    </dd>
+                    
+                </dl>
+               
+                <form asp-action="Sil">
+                    <input type="hidden" asp-for="UyeId" />
+                    <input type="submit" value="Sil" class="btn btn-danger" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="container">
+    <div class="table-responsive">
+        <nav class="navbar navbar-default" role="navigation">
+            <table class="table">
+
+                <thead>
+
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProfilFoto)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Ad)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SoyAd)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.Sifre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Onay)
+                        </th>
+                    </tr>
+                </thead>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="~/img/@item.ProfilFoto" width="60" class="img-circle img-responsive" alt="" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SoyAd)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sifre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Onay)
+                        </td>
+
+                        <td>
+                            <a asp-action="Sil" asp-route-id="@item.UyeId">Sil </a> |
+                            @*<a asp-action="Onayla" asp-route-id="@item.YaziId">Onayla</a> |
+                                <a asp-action="Reddet" asp-route-id="@item.YaziId">Reddet</a> |
+                                <a asp-action="Oku" asp-route-id="@item.YaziId">Oku</a> |*@
+@*<a asp-action="Edit" asp-route-id="@item.UyeId">Düzenle </a> |*@
+
+                        @*</td>
+                    </tr>
+                }
+
+
+
+            </table>
+        </nav>
+    </div>
+
+
+</div>*@
+
+
+

@@ -1,0 +1,22 @@
+﻿@model Tuple<List<GeziYazisiSitesi.Modals.Sehir>, List<GeziYazisiSitesi.Modals.Ulke>>
+<li>
+    <a href="#"><div>ŞEHİRLER</div></a>
+    <ul>
+        @foreach (var ulke in Model.Item2)
+        {
+            <li>
+                <a href="#"><div>@ulke.Ad</div></a>
+                <ul>
+                    @foreach (var sehir in Model.Item1)
+                    {
+                        @if (sehir.UlkeId == ulke.UlkeId)
+                        {
+                            <li><a class="sehirPadding sf-with-ul" asp-action="Yazilar" asp-controller="Yazi" asp-route-sehir="@sehir.SehirId"><div>@sehir.Ad</div></a></li>
+                        }
+                    }
+                </ul>
+            </li>
+        }
+
+    </ul>
+</li>

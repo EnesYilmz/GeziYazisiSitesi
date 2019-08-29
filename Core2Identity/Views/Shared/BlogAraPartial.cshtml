@@ -1,0 +1,16 @@
+﻿
+
+
+<h4>Kullanıcı Ara</h4>
+@using (Html.BeginForm("TumUye", "Uye", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="input-group">
+        <input id="Ara" name="Ara" type="text" placeHolder="Adı Yazınız.." class="form-control">
+
+        <button class="fa fa-search" value="Ara" type="submit">
+          
+        </button>
+
+    </div>
+}
+@* placeHolder="" silik yazı yazdırıyor!! *@

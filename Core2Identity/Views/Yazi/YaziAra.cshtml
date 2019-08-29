@@ -1,0 +1,49 @@
+﻿@model Tuple<IOrderedQueryable<GeziYazisiSitesi.Modals.Yazi>, List<GeziYazisiSitesi.Modals.Sehir>>
+@{
+    ViewData["Title"] = "YaziAra";
+}
+
+<section id="page-title">
+    <div class="container clearfix">
+        <h1>"@ViewBag.Arama" İÇİN SONUÇLAR</h1>
+    </div>
+</section>
+<section id="content">
+    <div class="content-wrap">
+        <div class="container clearfix">
+            <div id="posts" class="post-grid grid-container grid-3 clearfix" data-layout="fitRows">
+                @foreach (var item in Model.Item1)
+                {
+
+                    <div class="entry clearfix">
+                        <div class="entry-image">
+                            <a asp-action="YaziOku" asp-route-id="@item.YaziId"><img class="image_fade" src="~/img/@Html.DisplayFor(modelItem => item.Resim)" alt="@Html.DisplayFor(modelItem => item.Baslik)"></a>
+                        </div>
+                        <div class="entry-title">
+                            <h2><a asp-action="YaziOku" asp-route-id="@item.YaziId">@Html.DisplayFor(modelItem => item.Baslik)</a></h2>
+                        </div>
+                        <ul class="entry-meta clearfix">
+                            <li><a href="@Url.Action("Yazilar","Yazi", new { sehir = item.SehirId })"><i class="fa fa-plane"></i> @Html.DisplayFor(modelItem => item.Sehir.Ad)  </a></li>
+                            <li><i class="icon-calendar3"></i> @Html.DisplayFor(modelItem => item.Tarih)</li>
+                            <li class="d-none d-sm-block"><i class="icon-comments"></i> @Html.DisplayFor(modelItem => item.YorumSayisi)</li>
+                            <li class="d-none d-sm-block"><i class="fa fa-thumbs-o-up"></i> @Html.DisplayFor(modelItem => item.BegenmeSayisi)</li>
+                            <li class="d-none d-sm-block"><i class="fa fa-eye"></i> @Html.DisplayFor(modelItem => item.Goruntulenme)</li>
+
+                        </ul>
+                        <div class="entry-content">
+                            <p>
+                                @if (item.Icerik.Length >= 200)
+                                {@Html.Raw(item.Icerik.ToString().Substring(0, 200)) }
+                            else
+                            { @Html.Raw(item.Icerik)}
+                            </p>
+                            <a asp-action="YaziOku" asp-route-id="@item.YaziId" class="more-link">Devamını Oku</a>
+                        </div>
+                    </div>
+
+                }
+            </div>
+
+        </div>
+    </div>
+</section>

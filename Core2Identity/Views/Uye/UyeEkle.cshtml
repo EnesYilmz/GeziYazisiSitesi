@@ -1,79 +1,120 @@
 ﻿@model Core2Identity.Models.Uye
+
 @{
     ViewData["Title"] = "UyeEkle";
 }
 
-<section id="page-title">
-    <div class="container clearfix center">
-        <h1>Register</h1>
-    </div>
-</section>
+<div class="container clearfix center">
 
+</div>
+<style>
+    .Arka {
+        background: url(bayrak.jpg) no-repeat center center fixed;
+      
+        background-size: cover;
+    }
 
-<section id="content">
+</style>
 
+<section id="content" data-loop="true" data-speed="1200" data-autoplay="5000">
+    <br />
+    <br />
+
+    <div class="section nopadding nomargin" style="width: 100%; height: 100%; position: absolute; left: 0; top: 0">
+      
+            <img src="~/images/log.jpg" class="Arka "style="width: 100%; height: 100%;">
+            </div>
+      
     <div class="content-wrap nopadding">
 
+        <div class="section nobg nopadding nomargin">
+            <div class="container-fluid divcenter clearfix">
 
-        <div class="section nobg full-screen nopadding nomargin">
-            <div class="container-fluid vertical-middle divcenter clearfix">
-
-
-
+               
                 <div class="card divcenter noradius noborder" style="max-width: 400px;">
                     <div class="card-body" style="padding: 40px;">
-                      <div class="center"><h3> KAYIT OL</h3></div>
-                        
-                        <form asp-action="UyeEkle" method="post" class="m-1 p-1">
+                        <form class="nobottommargin" asp-action="UyeEkle" method="post" enctype="multipart/form-data">
+
                             <div class="text-danger" asp-validation-summary="All"></div>
+                            <div class="text-danger" >@ViewBag.mail</div>
 
+                            <div class="center">
+                                <br />
+                                <br />
 
-                            <div class="form-group row">
-                                <label asp-for="Ad"></label>
-                                <input asp-for="Ad" class="form-control" />
-
-                            </div>
-                            <div class="form-group row">
-                                <label asp-for="SoyAd">SoyAd</label>
-                                <input asp-for="SoyAd" class="form-control" />
-
-
-                            </div>
-                            <div class="form-group row">
-                                <label asp-for="Sifre">Sifre</label>
-                                <input asp-for="Sifre" class="form-control" />
-
-
+                                <i class="fa fa-user-plus fa-2x ">
+                                    <h3>Kayıt Ol</h3>
+                                </i>
                             </div>
 
-                            <div class="form-group row">
-                                <label asp-for="Email"></label>
-                                <input asp-for="Email" class="form-control" />
+                            <div class="col_full">
+                                <label asp-for="Ad">Ad:</label>
+                                <input asp-for="Ad" class="form-control not-dark" />
+                            </div>
+
+                            <div class="col_full">
+                                <label asp-for="SoyAd">SoyAd:</label>
+                                <input asp-for="SoyAd" class="form-control not-dark" />
+                            </div>
+                            <div class="col_full">
+                                <label asp-for="Email">Email:</label>
+                                <input asp-for="Email" class="form-control not-dark" />
+                                
+                            </div>
+                            <div class="col_full">
+                                <label asp-for="Sifre">Sifre:</label>
+                                <input asp-for="Sifre" class="form-control not-dark" data-val="true" data-val-password="En az 6 karakter içermelidir." data-val-password-min="6" data-val-required="Şifrenizi giriniz..." />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="Sifre" data-valmsg-replace="true"></span>
+                            </div>
+
+                            <div class="col_full">
+                                <label>Tekrar Sifre:</label>
+                                <input class="form-control not-dark" type="password" id="verify" name="SifreTekrar" />
+                                <span id="verifynote" class="text-danger hidden">Şifreler uyuşmuyor!</span>
+
+                            </div>
+
+
+
+
+                            <div class="col_full nobottommargin">
+                                <button id="Kayit" class="btn btn-dark nomargin" disabled type="submit" value="Kayıt">Kayıt Ol</button>
 
 
                             </div>
-                           
-                            <a asp-action="Index">
-                                <button class="btn btn-lg btn-primary btn-block" type="submit" value="Kayıt Ol">Kayıt Ol</button>
-                            </a>
+                            <br />
+                            <br />
 
                         </form>
 
-
-
-
-
-
+                       
 
 
                     </div>
                 </div>
 
+                <br />
+                <br />
+
             </div>
         </div>
 
     </div>
+    <br />
+    <br />
 
-</section>
-
-
+</section><!-- #content end -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#verify').keyup(function () {
+                if ($(this).val() == $('#Sifre').val()) {
+                    $('#verifynote').addClass('hidden');
+                    $('#Kayit').attr("disabled", false);
+                } else {
+                    $('#verifynote').removeClass('hidden');
+                    $('#Kayit').attr("disabled", true);
+                }
+            });
+        });</script>
+}

@@ -20,34 +20,89 @@ namespace Core2Identity.Migrations
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Core2Identity.Models.Begen", b =>
+                {
+                    b.Property<int>("BegenId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("UyeId");
+
+                    b.Property<int?>("YaziId");
+
+                    b.HasKey("BegenId");
+
+                    b.HasIndex("UyeId");
+
+                    b.HasIndex("YaziId");
+
+                    b.ToTable("Begen");
+                });
+
             modelBuilder.Entity("Core2Identity.Models.Uye", b =>
                 {
                     b.Property<int>("UyeId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Ad")
-                        .HasMaxLength(20);
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DogumTarih");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(25);
+                        .HasMaxLength(50);
+
+                    b.Property<string>("FUrl");
+
+                    b.Property<string>("GUrl");
 
                     b.Property<int>("Onay");
 
                     b.Property<string>("ProfilFoto");
 
                     b.Property<string>("Sifre")
-                        .HasMaxLength(20);
+                        .HasMaxLength(100);
 
                     b.Property<string>("SoyAd")
-                        .HasMaxLength(20);
+                        .HasMaxLength(25);
+
+                    b.Property<string>("TUrl");
 
                     b.Property<DateTime>("Tarih");
 
+                    b.Property<int>("YaziSayisi");
+
                     b.Property<int>("YetkiId");
+
+                    b.Property<string>("ÖzBilgi");
+
+                    b.Property<string>("İnUrl");
 
                     b.HasKey("UyeId");
 
                     b.ToTable("Uye");
+                });
+
+            modelBuilder.Entity("Core2Identity.Models.Yorum", b =>
+                {
+                    b.Property<int>("YorumId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Icerik")
+                        .IsRequired();
+
+                    b.Property<DateTime>("Tarih");
+
+                    b.Property<int?>("UyeId");
+
+                    b.Property<int?>("YaziId");
+
+                    b.HasKey("YorumId");
+
+                    b.HasIndex("UyeId");
+
+                    b.HasIndex("YaziId");
+
+                    b.ToTable("Yorum");
                 });
 
             modelBuilder.Entity("GeziYazisiSitesi.Modals.Sehir", b =>
@@ -85,14 +140,16 @@ namespace Core2Identity.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Baslik")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(60);
 
                     b.Property<int>("BegenmeSayisi");
 
                     b.Property<int>("Goruntulenme");
 
                     b.Property<string>("Icerik")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(30000);
 
                     b.Property<bool>("Onay");
 
@@ -113,6 +170,28 @@ namespace Core2Identity.Migrations
                     b.HasIndex("UyeId");
 
                     b.ToTable("Yazi");
+                });
+
+            modelBuilder.Entity("Core2Identity.Models.Begen", b =>
+                {
+                    b.HasOne("Core2Identity.Models.Uye", "Uye")
+                        .WithMany()
+                        .HasForeignKey("UyeId");
+
+                    b.HasOne("GeziYazisiSitesi.Modals.Yazi", "Yazi")
+                        .WithMany()
+                        .HasForeignKey("YaziId");
+                });
+
+            modelBuilder.Entity("Core2Identity.Models.Yorum", b =>
+                {
+                    b.HasOne("Core2Identity.Models.Uye", "Uye")
+                        .WithMany()
+                        .HasForeignKey("UyeId");
+
+                    b.HasOne("GeziYazisiSitesi.Modals.Yazi", "Yazi")
+                        .WithMany()
+                        .HasForeignKey("YaziId");
                 });
 
             modelBuilder.Entity("GeziYazisiSitesi.Modals.Sehir", b =>

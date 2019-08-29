@@ -1,14 +1,22 @@
-﻿@model Tuple<IOrderedQueryable<GeziYazisiSitesi.Modals.Yazi>, List<GeziYazisiSitesi.Modals.Sehir>>
+﻿@using X.PagedList
+@using X.PagedList.Mvc
+@using X.PagedList.Mvc.Core
+@model Tuple<IPagedList<GeziYazisiSitesi.Modals.Yazi>, List<GeziYazisiSitesi.Modals.Sehir>>
 
 @{
     ViewData["Title"] = "Yazilar";
 }
 <section id="page-title">
     <div class="container clearfix">
-        <h1>En Son Yazılar</h1>
+        <h1>@ViewBag.SehirAdi @ViewBag.Baslık Yazılar</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Yazilar","Yazi", new { sehir = ViewBag.SehirId})">En Son</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Yazilar","Yazi", new { sehir = ViewBag.SehirId, siralama = "goruntulenme" })">En Çok Okunan</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Yazilar","Yazi", new { sehir = ViewBag.SehirId, siralama = "begenme" })">En Çok Beğenilen</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Yazilar","Yazi", new { sehir = ViewBag.SehirId, siralama = "yorum" })">En Çok Yorum Alan</a></li>
+        </ol>
     </div>
 </section>
-
 <section id="content">
     <div class="content-wrap">
         <div class="container clearfix">
@@ -18,22 +26,27 @@
 
                     <div class="entry clearfix">
                         <div class="entry-image">
-                            <a asp-action="Oku" asp-route-id="@item.YaziId"><img class="image_fade" src="~/img/@Html.DisplayFor(modelItem => item.Resim)" alt="@Html.DisplayFor(modelItem => item.Baslik)"></a>
+                            <a asp-action="YaziOku" asp-route-id="@item.YaziId"><img class="image_fade" src="~/img/@Html.DisplayFor(modelItem => item.Resim)" alt="@Html.DisplayFor(modelItem => item.Baslik)"></a>
                         </div>
                         <div class="entry-title">
-                            <h2><a asp-action="Oku" asp-route-id="@item.YaziId">@Html.DisplayFor(modelItem => item.Baslik)</a></h2>
+                            <h2><a asp-action="YaziOku" asp-route-id="@item.YaziId">@Html.DisplayFor(modelItem => item.Baslik)</a></h2>
                         </div>
                         <ul class="entry-meta clearfix">
-                            <li><a href="#"><i class="fa fa-plane"></i> @Model.Item2.FirstOrDefault(i => i.SehirId == item.SehirId).Ad  </a></li>
+                            <li><a href="@Url.Action("Yazilar","Yazi", new { sehir = item.SehirId })"><i class="fa fa-plane"></i> @Html.DisplayFor(modelItem => item.Sehir.Ad)  </a></li>
                             <li><i class="icon-calendar3"></i> @Html.DisplayFor(modelItem => item.Tarih)</li>
-                            <li class="d-none d-sm-block"><a href="blog-single.html#comments"><i class="icon-comments"></i> @Html.DisplayFor(modelItem => item.YorumSayisi)</a></li>
-                            <li class="d-none d-sm-block"><a href="blog-single.html#comments"><i class="fa fa-thumbs-o-up"></i> @Html.DisplayFor(modelItem => item.BegenmeSayisi)</a></li>
-                            <li><a href="blog-single.html#comments"><i class="fa fa-eye"></i> @Html.DisplayFor(modelItem => item.Goruntulenme)</a></li>
+                            <li class="d-none d-sm-block"><i class="icon-comments"></i> @Html.DisplayFor(modelItem => item.YorumSayisi)</li>
+                            <li class="d-none d-sm-block"><i class="fa fa-thumbs-o-up"></i> @Html.DisplayFor(modelItem => item.BegenmeSayisi)</li>
+                            <li><i class="fa fa-eye"></i> @Html.DisplayFor(modelItem => item.Goruntulenme)</li>
 
                         </ul>
                         <div class="entry-content">
-                            <p>@if (item.Icerik.Length >= 200) { @Html.Raw(item.Icerik.ToString().Substring(0, 200)) } else { @Html.Raw(item.Icerik) } </p>
-                            <a asp-action="Oku" asp-route-id="@item.YaziId" class="more-link">Devamını Oku</a>
+                            <p>
+                                @if (item.Icerik.Length >= 200)
+                                {@Html.Raw(item.Icerik.ToString().Substring(0, 200)) }
+                            else
+                            { @Html.Raw(item.Icerik)}
+                            </p>
+                            <a asp-action="YaziOku" asp-route-id="@item.YaziId" class="more-link">Devamını Oku</a>
                         </div>
                     </div>
 
@@ -42,9 +55,10 @@
             <!-- Pagination
             ============================================= -->
             <div class="row mb-3">
-                <div class="col-12">
-                    <a href="#" class="btn btn-outline-secondary float-left">&larr; Older</a>
-                    <a href="#" class="btn btn-outline-dark float-right">Newer &rarr;</a>
+                <div class="col-12 text-center">
+                    <div class="pagination">
+                        @Html.PagedListPager(Model.Item1, sayfa => Url.Action("Yazilar", new { sayfa, sehir = ViewBag.SehirId, siralama = ViewBag.Siralama }))
+                    </div>
                 </div>
             </div>
             <!-- .pager end -->
