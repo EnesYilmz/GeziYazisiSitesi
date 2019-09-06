@@ -16,7 +16,7 @@ Veritabanı olarak MSSQL kullanmalısınız. Veritabanınızın connection strin
 ## Kullanım
 
 Projeyi çalıştırdıktan sonra kayıt olup üye girişi yaptıktan sonra gezi yazısı yazabilir, yazılara yorum ve beğeni atabilirsiniz.
-Ayrıca admin siteye yeni ülke ve şehirler ekleyebilir ayrıca siteye gönderilen yazıları yayınlanması için onaylayabilir.
+Admin siteye yeni ülke ve şehirler ekleyebilir ayrıca siteye gönderilen yazıları yayınlanması için onaylayabilir.
 
 ## Meta
 
