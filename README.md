@@ -5,7 +5,7 @@ Kendimizi geliştirmek için arkadaşım Emirhan ile beraber yaptık.
 
 ## Kurulum
 
-Projeyi indirip Visual Studio ile açtıktan aşağıdaki komut ile veritabanını oluşturabilirsiniz.
+Projeyi indirip Visual Studio ile açtıktan sonra aşağıdaki komut ile veritabanını oluşturabilirsiniz.
 
 ```sh
 dotnet ef database update
